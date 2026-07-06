@@ -12,6 +12,16 @@ the rigid MadraX physics of Tier 1 cannot.
 > [Local runs](#local-runs-all-cores-no-slurm) below. All Python helpers run anywhere
 > under `uv run`.
 
+> **Before submitting the full array, run ONE real job and check its `ddG.db3`.**
+> `ddG_backrub.xml`'s ddG output only exists because `InterfaceDdGMover` carries
+> `db_reporter="dbreport"` and `BackrubProtocol` carries `trajectory_apply_mover=...` —
+> both are load-bearing wiring, not decoration, and Rosetta will not error if either is
+> silently dropped by a version mismatch (see [BUILD_ROSETTA.md](BUILD_ROSETTA.md) Step 0
+> on the pinned Rosetta version). `run_flex_ddg.py`'s parser (`parse_ddg_db3`) raises a
+> loud `ValueError` naming exactly which batch(es) are missing if this ever goes wrong —
+> **that check only protects you if you run it before the 20k-job array, not after.**
+> See BUILD_ROSETTA.md Step 4 for the one-job smoke test.
+
 ## Target: ~20,000 samples in <4h on UC ARC
 
 This tier is budgeted to **~20,000** high-value mutations (not full saturation) and is tuned to
@@ -75,7 +85,7 @@ makes the node count exact.
 | `make_mutfiles.py` | Budgeted, contact-ranked sampling (via shared `interface_utils`) → per-mutation resfiles + `jobs.csv`. |
 | `estimate_runtime.py` | **A-priori** CPU-hour/wall estimate from structure geometry (no Rosetta); optimizes NODES/`ntrials` for a target wall clock. |
 | `plan_run.py` | Benchmarks real mutations, sizes NODES/`--time` for the target, prints the exact `sbatch` command. |
-| `run_flex_ddg.py` | Runs one `jobs.csv` row through Rosetta and parses `ddG.db3` → one shared-schema CSV row (idempotent/resumable). |
+| `run_flex_ddg.py` | Runs one `jobs.csv` row through Rosetta and parses `ddG.db3` → one shared-schema CSV row (idempotent/resumable, cleans up its scratch dir on success — pass `--keep-workdir` to inspect it). |
 | `run_node_chunk.sh` | Node-local driver: runs this node's stride of `jobs.csv`, 64-at-a-time via `xargs -P`. |
 | `submit_array.sbatch` | Node-packed SLURM array: one task == one 64-core node. |
 | `fetch_gam_coeffs.py` | Installs official Flex ddG reweighting coefficients (never fabricated). |
@@ -182,3 +192,9 @@ uv run python rosetta_flex/run_flex_ddg.py --self-test          # synthetic db3 
 uv run python rosetta_flex/run_flex_ddg.py --parse-only path/to/ddG.db3   # parse a real db3
 uv run python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ --limit 1   # resfiles + jobs.csv
 ```
+`--self-test` and `--parse-only` only validate the SQL against `parse_ddg_db3`'s expected
+schema (`structure_scores` joined to `batches` on `batch_id`, classified by `batches.name`
+prefix — see `ddG_backrub.xml`'s header comment); they cannot catch a Rosetta version that
+silently drops the `db_reporter`/`trajectory_apply_mover` mover attributes and writes no
+scores at all. Only a real job on the target Rosetta build (BUILD_ROSETTA.md Step 4) verifies
+that.

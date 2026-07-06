@@ -269,17 +269,21 @@ def main() -> None:
     nt, nodes, wall, _ = max(fitting, key=lambda r: r[0])
     hh, mm = divmod(int(min(args.target_hours * 60, math.ceil(wall / 5) * 5 + 20)), 60)
     walltime = f"{hh:02d}:{mm:02d}:00"
-    print("\n================ RECOMMENDED (<%0.0f h) ================" % args.target_hours)
+    benchmarked = args.benchmark_min_per_mut is not None
+    banner = f"================ RECOMMENDED (<{args.target_hours:.0f} h) ================" if benchmarked else \
+             f"========== RECOMMENDED (<{args.target_hours:.0f} h) -- UNVERIFIED ESTIMATE =========="
+    print(f"\n{banner}")
+    if not benchmarked:
+        print("  !! literature-anchored (+-~2x), NOT measured on this build/hardware.")
+        print("  !! Run `plan_run.py --benchmark 8` once Rosetta is built, then re-run this with")
+        print("  !! --benchmark_min_per_mut <measured> before trusting this node count at scale.")
     print(f"  ntrials={nt}  NODES={nodes}  ({nodes*args.cores_per_node} cores)  est wall {wall/60:.1f} h")
     print(f"  NJOBS={n_jobs}")
     print(f"  sbatch --array=0-$((NODES-1)) --time={walltime} --cpus-per-task={args.cores_per_node} \\")
     print(f"    --export=ALL,NJOBS=$NJOBS,NODES={nodes},CORES_PER_NODE={args.cores_per_node},"
           f"BACKRUB_TRIALS={nt},ROSETTA_SCRIPTS_BIN=$ROSETTA_SCRIPTS_BIN \\")
     print(f"    rosetta_flex/submit_array.sbatch")
-    print("=====================================================")
-    if args.benchmark_min_per_mut is None:
-        print("NOTE: literature-anchored (~+-2x). Run `plan_run.py --benchmark 8` once Rosetta is built,")
-        print("      then re-run with --benchmark_min_per_mut <measured> for an exact node count.")
+    print("=" * len(banner))
 
 
 if __name__ == "__main__":

@@ -23,6 +23,9 @@
 #   ROSETTA_SCRIPTS_BIN  rosetta_scripts binary                       (default rosetta_scripts.default.linuxgccrelease)
 #   BACKRUB_TRIALS       backrub MC steps (default 1500 tuned <4h; 3500 = Graphinity)   NSTRUCT (default 1)
 #   GAM_COEFFS           optional {score_type: weight} JSON (empty => nogam / total_score)
+#   KEEP_WORKDIR         non-empty => keep each job's Rosetta scratch dir (structures, ddG.db3,
+#                        struct.db3) after success, for debugging. Default deletes it (unbounded
+#                        disk otherwise across ~20k jobs).
 set -uo pipefail
 
 PROJECT_DIR="${PROJECT_DIR:-$PWD}"
@@ -63,6 +66,8 @@ run_one() {
   fi
   local gam_arg=()
   [ -n "$GAM_COEFFS" ] && gam_arg=(--gam-coeffs "$GAM_COEFFS")
+  local keep_arg=()
+  [ -n "${KEEP_WORKDIR:-}" ] && keep_arg=(--keep-workdir)
   # ${arr[@]+"${arr[@]}"} expands to nothing when the array is empty *without*
   # tripping `set -u` on bash < 4.4 (macOS ships bash 3.2). A bare "${gam_arg[@]}"
   # on an empty array is an "unbound variable" error there and kills every worker.
@@ -76,6 +81,7 @@ run_one() {
     --workdir "$WORK_DIR/job_${i}" \
     --output "$out" \
     ${gam_arg[@]+"${gam_arg[@]}"} \
+    ${keep_arg[@]+"${keep_arg[@]}"} \
     || { echo "$(date '+%F %T') job ${i} FAILED (rosetta or parse error)" >&2; return 1; }
 }
 

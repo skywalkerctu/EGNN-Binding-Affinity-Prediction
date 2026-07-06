@@ -88,7 +88,7 @@ def benchmark(args, n_rows: int) -> Optional[float]:
 
 
 def plan(n_jobs: int, minutes_per_mut: float, cores_per_node: int, max_hours: float,
-         max_nodes: int, margin: float) -> None:
+         max_nodes: int, margin: float, benchmarked: bool) -> None:
     """Find the minimum node count whose per-core serial slice fits max_hours, and print sbatch."""
     ceiling_min = max_hours * 60.0
     total_core_hours = n_jobs * minutes_per_mut / 60.0
@@ -124,7 +124,12 @@ def plan(n_jobs: int, minutes_per_mut: float, cores_per_node: int, max_hours: fl
     walltime = f"{hh:02d}:{mm:02d}:00"
     LOGGER.info("Recommended: %d node(s) (%d cores), est wall %.1fh, request --time=%s.",
                 nodes, nodes * cores_per_node, wall_min / 60, walltime)
-    print("\n================ LAUNCH COMMAND ================")
+    banner = "================ LAUNCH COMMAND ================" if benchmarked else \
+             "========== LAUNCH COMMAND (UNVERIFIED ESTIMATE) =========="
+    print(f"\n{banner}")
+    if not benchmarked:
+        print("!! minutes_per_mut is a LITERATURE GUESS (+-~2x), not measured on this build/hardware.")
+        print("!! Re-run with --benchmark 8+ (needs Rosetta built) before trusting this node count.")
     print(f"NJOBS={n_jobs}")
     print(f"NODES={nodes}")
     print("sbatch \\")
@@ -134,7 +139,7 @@ def plan(n_jobs: int, minutes_per_mut: float, cores_per_node: int, max_hours: fl
     print(f"  --export=ALL,NJOBS=$NJOBS,NODES=$NODES,CORES_PER_NODE={cores_per_node},"
           f"ROSETTA_SCRIPTS_BIN=$ROSETTA_SCRIPTS_BIN \\")
     print(f"  rosetta_flex/submit_array.sbatch")
-    print("===============================================")
+    print("=" * len(banner))
     print("(Export ROSETTA_SCRIPTS_BIN to your compiled binary first; add GAM_COEFFS=... to reweight.)")
 
 
@@ -167,17 +172,19 @@ def main() -> None:
     LOGGER.info("jobs.csv has %d rows; planning for %d jobs.", n_rows, n_jobs)
 
     minutes_per_mut = args.minutes_per_mut
+    benchmarked = False
     if args.benchmark > 0:
         measured = benchmark(args, n_rows)
         if measured is None:
-            LOGGER.error("Benchmark failed; falling back to --minutes_per_mut=%.1f for the plan.", minutes_per_mut)
+            LOGGER.error("Benchmark failed; falling back to UNVERIFIED --minutes_per_mut=%.1f for the plan.", minutes_per_mut)
         else:
             minutes_per_mut = measured
+            benchmarked = True
     else:
         LOGGER.info("No benchmark; using assumed %.1f min/mut. Run with --benchmark 12 on the cluster "
                     "for a real number.", minutes_per_mut)
 
-    plan(n_jobs, minutes_per_mut, args.cores_per_node, args.max_hours, args.max_nodes, args.margin)
+    plan(n_jobs, minutes_per_mut, args.cores_per_node, args.max_hours, args.max_nodes, args.margin, benchmarked)
 
 
 if __name__ == "__main__":
