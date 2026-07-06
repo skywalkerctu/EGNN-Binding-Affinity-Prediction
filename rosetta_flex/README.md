@@ -5,9 +5,56 @@ Generates the Tier-2 "plasticity" dataset: backbone-flexible ΔΔG values from t
 structures. Tier 2 teaches the EGNN how backbones flex to absorb a mutation —
 the rigid MadraX physics of Tier 1 cannot.
 
-> **This pipeline is written to run on an HPC cluster, not locally.** Nothing
-> here is executed as part of the build. Rosetta is a large, separately-licensed
-> C++ package; install/build it on the cluster first.
+> **This pipeline targets an HPC cluster.** Rosetta is a large, separately-licensed
+> C++ package; **build it on UC ARC first — see [`BUILD_ROSETTA.md`](BUILD_ROSETTA.md).**
+> The node driver (`run_node_chunk.sh`) also runs **standalone on one machine**, filling
+> all local cores, once a local Rosetta build is available — see
+> [Local runs](#local-runs-all-cores-no-slurm) below. All Python helpers run anywhere
+> under `uv run`.
+
+## Target: ~20,000 samples in <4h on UC ARC
+
+This tier is budgeted to **~20,000** high-value mutations (not full saturation) and is tuned to
+finish in **under 4 hours** on UC ARC's 64-core AMD EPYC nodes. The tuned operating point is
+**`backrub=1500`, 13 nodes (832 cores) ≈ 3.8h**:
+
+- **Budgeted, contact-ranked sampling** (`make_mutfiles.py --target_samples 20000`): keeps only
+  genuine inter-chain contacts (via the shared `Min_Interchain_Distance`), ranks by contact
+  tightness, caps per structure, and round-robins across complexes for diversity.
+- **Node-packed execution**: one SLURM array task owns a whole 64-core node and runs its stride
+  of `jobs.csv` 64-at-a-time (`run_node_chunk.sh`), so a *tiny* array (`0..NODES-1`) drives all
+  20k jobs — no array-index-cap problems, no idle cores.
+- **Self-calibrated node count**: `estimate_runtime.py` / `plan_run.py --benchmark N` size the run
+  and print the exact `sbatch` line (NODES + `--time`) that fits the target. 20k mutations at
+  `backrub=1500` ≈ 2,500 core-hours ⇒ **13 nodes for <4h** (or ~4 nodes if you relax to <24h).
+- **Accuracy vs. the 4h target**: backbone-flexible Flex ddG is already more accurate than MadraX's
+  rigid physics. `backrub=1500` is a **modest** reduction from Graphinity's validated 3500 (~60% of
+  per-mutation cost is backrub; the rest is repack/minimize). Restore full accuracy anytime with
+  `BACKRUB_TRIALS=3500` (needs ~19 nodes for <4h, or ~8 nodes for <10h). Optional **GAM reweighting**
+  (`fetch_gam_coeffs.py`; Pearson ~0.46 vs experiment) is orthogonal and recommended.
+
+### Estimating the runtime *before* touching the cluster
+
+`estimate_runtime.py` predicts the CPU cost with **no Rosetta run** — it reads pose size and the
+8 Å mutation neighbourhood straight from the PDBs and applies a two-component cost model
+(backrub ≈ fixed per `ntrials`; repack/minimize ≈ pose size), anchored to a literature central
+of ~12 min/mut. Because TCR-pMHC complexes are size-homogeneous (~500–600 residues), a couple
+of parsed structures generalise to the whole 20k set. Example (projected to 20k, **optimised for
+<4 h**, defaults to `backrub=1500` / 13-node budget):
+
+```bash
+python rosetta_flex/estimate_runtime.py --jobs_csv rosetta_flex/jobs/jobs.csv \
+  --project_samples 20000 --target_hours 4 --max_nodes 13
+# validated on 1d9k (519 residues): recommends backrub=1500 @ 13 nodes (~3.8 h).
+# It keeps the HIGHEST backrub that fits <4h within --max_nodes (accuracy-preserving knee).
+```
+
+**Fitting under 4 h** is a backrub×nodes tradeoff (a ~4.5 min/mut repack+minimize floor means
+backrub alone can't get there): 3500→~19 nodes, 2000→~14, **1500→13**, 1000→~11, 750→~10. Below
+~1000 you stop saving nodes while spending real accuracy, so 1500 is the knee for a ~13-node budget.
+The estimate is literature-anchored (±~2×); one real timing from `plan_run.py --benchmark 8`
+(at `--backrub_trials 1500`) fed back via `estimate_runtime.py --benchmark_min_per_mut <measured>`
+makes the node count exact.
 
 > **Note on Graphinity.** Graphinity ships a published Flex ddG set, but it is
 > **antibody–antigen (SAbDab)**, a different binding problem. We do **not** use
@@ -25,23 +72,41 @@ the rigid MadraX physics of Tier 1 cannot.
 | File | Role |
 |------|------|
 | `ddG_backrub.xml` | Canonical flex_ddG RosettaScripts protocol (backrub ensemble + `InterfaceDdGMover`, talaris2014). |
-| `make_mutfiles.py` | Enumerates interface mutations (via shared `interface_utils`), writes per-mutation resfiles + `jobs.csv`. |
-| `run_flex_ddg.py` | Runs one `jobs.csv` row through Rosetta and parses `ddG.db3` → one shared-schema CSV row. |
-| `submit_array.sbatch` | SLURM array driver: one array task per `jobs.csv` row. |
-| `merge_results.py` | Concatenates per-job CSVs into one Flex ddG dataset. |
+| `make_mutfiles.py` | Budgeted, contact-ranked sampling (via shared `interface_utils`) → per-mutation resfiles + `jobs.csv`. |
+| `estimate_runtime.py` | **A-priori** CPU-hour/wall estimate from structure geometry (no Rosetta); optimizes NODES/`ntrials` for a target wall clock. |
+| `plan_run.py` | Benchmarks real mutations, sizes NODES/`--time` for the target, prints the exact `sbatch` command. |
+| `run_flex_ddg.py` | Runs one `jobs.csv` row through Rosetta and parses `ddG.db3` → one shared-schema CSV row (idempotent/resumable). |
+| `run_node_chunk.sh` | Node-local driver: runs this node's stride of `jobs.csv`, 64-at-a-time via `xargs -P`. |
+| `submit_array.sbatch` | Node-packed SLURM array: one task == one 64-core node. |
+| `fetch_gam_coeffs.py` | Installs official Flex ddG reweighting coefficients (never fabricated). |
+| `merge_results.py` | Concatenates per-job CSVs into one dataset + coverage/missing-job report. |
+| `BUILD_ROSETTA.md` | One-time Rosetta build on UC ARC. |
 
-## Workflow (on HPC)
+## Workflow (on UC ARC)
 ```bash
-# 1. Enumerate jobs (safe to run anywhere; no Rosetta needed)
-python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ --out_dir rosetta_flex/jobs
+# 0. One-time: build Rosetta and export ROSETTA_SCRIPTS_BIN  (see BUILD_ROSETTA.md)
 
-# 2. Submit the array (one task per mutation)
-NJOBS=$(($(wc -l < rosetta_flex/jobs/jobs.csv) - 1))
-sbatch --array=0-$((NJOBS-1))%50 rosetta_flex/submit_array.sbatch
+# 1. Enumerate the 20k-sample budget (safe to run anywhere; no Rosetta needed)
+python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ \
+  --out_dir rosetta_flex/jobs --target_samples 20000
 
-# 3. Merge per-job outputs into the final dataset
+# 2. (optional) Install GAM reweighting coefficients for higher accuracy
+python rosetta_flex/fetch_gam_coeffs.py --from-tsv my_flexddg_weights.tsv
+
+# 3. Benchmark + size the run for the <4h target; copy the sbatch line it prints
+python rosetta_flex/plan_run.py --benchmark 8 --backrub_trials 1500 --max_hours 4 --max_nodes 13
+
+# 4. Launch the node-packed array (tuned <4h point: NODES=13, backrub=1500)
+NJOBS=$(($(wc -l < rosetta_flex/jobs/jobs.csv) - 1)); NODES=13
+sbatch --array=0-$((NODES-1)) --time=04:00:00 \
+  --export=ALL,NJOBS=$NJOBS,NODES=$NODES,BACKRUB_TRIALS=1500,ROSETTA_SCRIPTS_BIN=$ROSETTA_SCRIPTS_BIN \
+  rosetta_flex/submit_array.sbatch
+
+# 5. Merge per-job outputs + see coverage (which jobs, if any, are missing)
 python rosetta_flex/merge_results.py
 ```
+The run is **resumable**: every mutation writes `results/parts/job_<i>.csv` and finished jobs
+are skipped, so a requeue (or a second `sbatch`) fills only the gaps.
 
 ## Protocol parameters (cheap defaults, after Graphinity 2025)
 
@@ -49,13 +114,17 @@ Defaults follow the cost-reduced Flex ddG settings from Hummer et al.
 ([*Nat. Comput. Sci.* 2025](https://www.nature.com/articles/s43588-025-00823-8)),
 which make a >20k-mutation Tier-2 dataset feasible:
 
-- **Backrub trials: `3500`** (`--backrub_trials` / `BACKRUB_TRIALS`) — vs Barlow 2018's `35000`.
+- **Backrub trials: `1500`** (`--backrub_trials` / `BACKRUB_TRIALS`) — throughput-tuned for the <4h /
+  13-node target (see [estimate_runtime.py](estimate_runtime.py)). Graphinity **validated `3500`**;
+  pass `BACKRUB_TRIALS=3500` for the reference-accuracy set. Barlow 2018 used `35000`. `1500` is a
+  modest reduction (backrub is ~60% of per-mutation cost) — keep it ≥1000 to avoid under-relaxing
+  large mutations.
 - **Ensemble size: `nstruct = 1`** (`--nstruct` / `NSTRUCT`) — vs Barlow 2018's `35`.
 - Score function: `talaris2014`.
 - `chains_to_move`: `DE` (TCR α/β separated from pMHC `ABC`) — set in `make_mutfiles.py`.
 
-Together these are ~**350× cheaper per mutation** than the full Barlow protocol
-(`10× fewer backrub steps × 35× smaller ensemble`) for **near-identical ΔΔG**.
+At `backrub=3500`/`nstruct=1` these are ~**350× cheaper per mutation** than the full Barlow protocol
+for **near-identical ΔΔG**; the tuned `backrub=1500` trims a further ~40% of backrub cost.
 Why it holds up:
 - ΔΔG is a **difference** (mutant − WT) scored in the *same* locally-relaxed
   backbone context, so most single-model/limited-sampling noise **cancels** — one
@@ -92,9 +161,24 @@ PDB_ID, Chain, Residue_Position, WT_Amino_Acid, Mutant_Amino_Acid, ddG, source
 `source = "rosetta_flex"`. ΔΔG sign convention is **mutant − wild type**, matching
 the MadraX generator.
 
+## Local runs (all cores, no SLURM)
+`run_node_chunk.sh` runs standalone off-cluster: set `NODES=1 TASK_ID=0` and point
+`CORES_PER_NODE` at your machine's core count to fan `jobs.csv` across every local core
+via `xargs -P`. `PYTHON` defaults to `uv run python` when uv is present, so the workers
+use the `uv sync` environment. A local Rosetta build is still required (override
+`ROSETTA_SCRIPTS_BIN`, e.g. `rosetta_scripts.default.macosclangrelease`).
+```bash
+uv run python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ \
+  --out_dir rosetta_flex/jobs --target_samples 20000
+CORES_PER_NODE=$(sysctl -n hw.ncpu 2>/dev/null || nproc) NODES=1 TASK_ID=0 \
+  ROSETTA_SCRIPTS_BIN=/path/to/rosetta_scripts.<platform>release \
+  bash rosetta_flex/run_node_chunk.sh
+uv run python rosetta_flex/merge_results.py
+```
+
 ## Local validation without Rosetta
 ```bash
-python rosetta_flex/run_flex_ddg.py --self-test          # synthetic db3 → parser check
-python rosetta_flex/run_flex_ddg.py --parse-only path/to/ddG.db3   # parse a real db3
-python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ --limit 1   # resfiles + jobs.csv
+uv run python rosetta_flex/run_flex_ddg.py --self-test          # synthetic db3 → parser check
+uv run python rosetta_flex/run_flex_ddg.py --parse-only path/to/ddG.db3   # parse a real db3
+uv run python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ --limit 1   # resfiles + jobs.csv
 ```

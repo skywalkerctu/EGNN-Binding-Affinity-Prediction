@@ -47,6 +47,11 @@ OUTPUT_FIELDS = [
 ]
 SOURCE_TAG = "rosetta_flex"
 
+# Default location for the official Kortemme flex_ddG GAM/reweighting coefficients.
+# fetch_gam_coeffs.py writes here; if the file exists it is used automatically (no
+# fabricated numbers -- absent file simply falls back to raw total_score, "nogam").
+DEFAULT_GAM_COEFFS = Path(__file__).resolve().parent / "gam_coeffs" / "flex_ddg_gam.json"
+
 
 # --------------------------------------------------------------------------- #
 # Rosetta command construction                                                #
@@ -251,19 +256,29 @@ def main() -> None:
     ap.add_argument("--output", type=str, default="rosetta_flex/results/flex_ddg.csv")
     ap.add_argument("--rosetta_bin", type=str, default=os.environ.get("ROSETTA_SCRIPTS_BIN", "rosetta_scripts.default.linuxgccrelease"))
     ap.add_argument("--protocol_xml", type=str, default="rosetta_flex/ddG_backrub.xml")
-    ap.add_argument("--backrub_trials", type=int, default=3500,
-                    help="Backrub MC steps. Default 3500 (Hummer et al./Graphinity 2025) — ~10x cheaper "
-                         "than Barlow 2018's 35000 with near-identical ddG. Pass 35000 for the full Barlow protocol.")
+    ap.add_argument("--backrub_trials", type=int, default=1500,
+                    help="Backrub MC steps. Default 1500 = throughput-tuned for a <4h / 20k run (see "
+                         "estimate_runtime.py). Graphinity/Hummer 2025 validated 3500 (pass that for the "
+                         "reference-accuracy set); Barlow 2018 used 35000. Below ~1000 risks under-relaxing "
+                         "large mutations, so 1500 is a modest, not aggressive, reduction.")
     ap.add_argument("--nstruct", type=int, default=1,
                     help="Ensemble size. Default 1 (Hummer et al./Graphinity 2025) — vs Barlow 2018's 35. "
                          "The mutant-minus-WT difference cancels most single-model noise; ~35x cheaper. Pass 35 for the full protocol.")
     ap.add_argument("--workdir", type=str, default=None, help="Per-job scratch dir. Defaults to a temp dir.")
-    ap.add_argument("--gam-coeffs", type=str, default=None, help="JSON of {score_type: weight} for GAM reweighting (optional).")
+    ap.add_argument("--gam-coeffs", type=str, default=None,
+                    help=f"JSON of {{score_type: weight}} for GAM reweighting. If omitted, "
+                         f"{DEFAULT_GAM_COEFFS} is used when present, else raw total_score (nogam).")
     ap.add_argument("--parse-only", type=str, default=None, help="Parse an existing ddG.db3 and print the ddG, no Rosetta run.")
     ap.add_argument("--self-test", action="store_true", help="Build a synthetic db3 and verify the parser end-to-end.")
     args = ap.parse_args()
 
-    gam = load_gam_coeffs(args.gam_coeffs)
+    # Resolve GAM coefficients: explicit flag wins, else auto-use the shipped default if
+    # fetch_gam_coeffs.py has populated it, else None (raw total_score).
+    gam_path = args.gam_coeffs
+    if gam_path is None and DEFAULT_GAM_COEFFS.exists():
+        gam_path = str(DEFAULT_GAM_COEFFS)
+        LOGGER.info("Using default GAM coefficients at %s.", gam_path)
+    gam = load_gam_coeffs(gam_path)
 
     if args.self_test:
         with tempfile.TemporaryDirectory() as td:
@@ -285,6 +300,14 @@ def main() -> None:
     if args.job_index is None:
         LOGGER.error("--job-index is required for a real run (or use --parse-only / --self-test).")
         sys.exit(2)
+
+    # Idempotent resume: if this job's per-task CSV already has a row, skip the (expensive)
+    # Rosetta run. Belt-and-suspenders with the sbatch driver's own skip filter, so a requeued
+    # array task never recomputes finished mutations.
+    out_path = Path(args.output)
+    if out_path.exists() and out_path.stat().st_size > 0:
+        LOGGER.info("job-index %d: output %s already present; skipping.", args.job_index, out_path)
+        return
 
     job = read_job(args.jobs_csv, args.job_index)
     job["_workdir"] = args.workdir or tempfile.mkdtemp(prefix=f"flexddg_{job['job_id']}_")

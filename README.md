@@ -20,7 +20,7 @@ inter-chain contact).
 | Tier | Engine | Script | Teaches | Scale |
 |------|--------|--------|---------|-------|
 | 1 | MadraX (GPU, rigid) | `generate_tcr_pmhc_dataset.py` | steric clashes / immune geometry | ≥1M |
-| 2 | Rosetta Flex ddG (HPC, flexible) | `rosetta_flex/` | backbone flexibility | ~thousands |
+| 2 | Rosetta Flex ddG (CPU, HPC, flexible) | `rosetta_flex/` | backbone flexibility | ~20k (budgeted) |
 
 Both share interface detection (`interface_utils.py`), so they mutate comparable positions.
 
@@ -105,12 +105,21 @@ uv run python merge_shards.py \
 
 Backbone-flexible ΔΔG via the Flex ddG protocol
 ([Barlow et al. 2018](https://pubs.acs.org/doi/10.1021/acs.jpcb.7b11367)), on the
-**same** structures. **HPC only** — see [`rosetta_flex/README.md`](rosetta_flex/README.md).
+**same** structures. Needs a compiled Rosetta binary (built on ARC — see
+[`rosetta_flex/README.md`](rosetta_flex/README.md)). On ARC, one SLURM array task owns one
+64-core node and packs it with `xargs -P` (all cores); locally the same node script runs
+standalone across all local cores.
 ```bash
-python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ --out_dir rosetta_flex/jobs
-NJOBS=$(($(wc -l < rosetta_flex/jobs/jobs.csv) - 1))
-sbatch --array=0-$((NJOBS-1))%50 rosetta_flex/submit_array.sbatch
-python rosetta_flex/merge_results.py
+uv run python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ --out_dir rosetta_flex/jobs
+
+# ARC — one exclusive node per task, all 64 cores packed per node:
+sbatch rosetta_flex/submit_array.sbatch          # override --array=0-<NODES-1> to add nodes
+
+# Local — fill all local cores on one machine (needs a local Rosetta build):
+CORES_PER_NODE=$(sysctl -n hw.ncpu 2>/dev/null || nproc) NODES=1 TASK_ID=0 \
+    bash rosetta_flex/run_node_chunk.sh
+
+uv run python rosetta_flex/merge_results.py
 ```
 Graphinity's published Flex ddG data is antibody–antigen and is used only as a
 *protocol* reference, not as labels.
