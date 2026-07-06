@@ -415,6 +415,14 @@ def load_done_pdb_ids(done_path: Path) -> set:
 
 
 def main() -> None:
+    # Auto-detect a SLURM array environment so `sbatch --array=0-N` shards with zero
+    # extra flags: SLURM_ARRAY_TASK_ID -> --shard_id, SLURM_ARRAY_TASK_COUNT -> --num_shards.
+    # An explicit --shard_id/--num_shards on the command line still overrides these.
+    _slurm_task_id = int(os.environ.get("SLURM_ARRAY_TASK_ID", -1))
+    _slurm_task_count = int(os.environ.get("SLURM_ARRAY_TASK_COUNT", 0))
+    _default_num_shards = _slurm_task_count if _slurm_task_id >= 0 and _slurm_task_count > 0 else 1
+    _default_shard_id = _slurm_task_id if _slurm_task_id >= 0 else 0
+
     parser = argparse.ArgumentParser(description="Generate synthetic TCR-pMHC ddG dataset using MadraX.")
     parser.add_argument("--pdb_dir", type=str, default="stcrdab_structures/", help="Directory containing STCRDab PDB files.")
     parser.add_argument("--output", type=str, default="tcr_pmhc_interface_ddg.csv", help="Output CSV file path.")
@@ -425,21 +433,65 @@ def main() -> None:
     parser.add_argument("--complex_chains", type=str, default=",".join(DEFAULT_COMPLEX_CHAINS), help="Comma-separated chain IDs that make up the full TCR-pMHC complex.")
     parser.add_argument("--mutation_batch_size", type=int, default=200, help="Number of point mutants scored per MadraX forward pass.")
     parser.add_argument("--clash_threshold", type=float, default=1000.0, help="|ddG| (kcal/mol) above which a mutant is treated as a steric clash and filtered out.")
-    parser.add_argument("--num_workers", type=int, default=max(1, (os.cpu_count() or 2) - 1), help="CPU worker processes for PDB parsing / interface detection.")
+    parser.add_argument("--num_workers", type=int, default=None,
+                        help="CPU worker processes for PDB parsing / interface detection, PER SHARD. "
+                             "Default: (cpu_count - 1) split evenly across --num_shards so concurrent "
+                             "shards on one box do not oversubscribe the cores (total ~= cpu_count).")
     parser.add_argument("--clean_dir", type=str, default=None, help="Directory to cache cleaned, chain-filtered PDBs. Defaults to <pdb_dir>/_clean.")
     parser.add_argument("--resume", action="store_true", help="Skip PDB IDs already recorded as done in <output>.done.")
-    parser.add_argument("--num_shards", type=int, default=1, help="Partition the PDB list into this many shards for parallel runs (one process per shard; they may share a single GPU since the bottleneck is CPU-side).")
-    parser.add_argument("--shard_id", type=int, default=0, help="Which shard (0..num_shards-1) this process handles. Output/failure/.done paths are auto-suffixed with .shardN.")
+    parser.add_argument("--num_shards", type=int, default=_default_num_shards,
+                        help="Partition the PDB list into this many shards for parallel runs (one process "
+                             "per shard; they may share a single GPU since the bottleneck is CPU-side). "
+                             "Auto-set from SLURM_ARRAY_TASK_COUNT.")
+    parser.add_argument("--shard_id", type=int, default=_default_shard_id,
+                        help="Which shard (0..num_shards-1) this process handles. Output/failure/.done "
+                             "paths are auto-suffixed with .shardN. Auto-set from SLURM_ARRAY_TASK_ID.")
     args = parser.parse_args()
 
     if args.num_shards < 1 or not (0 <= args.shard_id < args.num_shards):
         raise SystemExit(f"Invalid sharding: shard_id={args.shard_id} must be in [0, num_shards={args.num_shards}).")
 
+    # Resolve the per-shard worker count. The old default was (cpu_count - 1) PER PROCESS,
+    # so N concurrent shards spawned N*(cpu_count-1) workers and thrashed the box. Divide
+    # the core budget across the shards instead; a single-shard run is unchanged.
+    if args.num_workers is None:
+        total_budget = max(1, (os.cpu_count() or 2) - 1)
+        args.num_workers = max(1, total_budget // args.num_shards)
+    LOGGER.info(
+        "Sharding: shard %d/%d, %d DataLoader worker(s) per shard (~%d cores total across shards).",
+        args.shard_id, args.num_shards, args.num_workers, args.num_workers * args.num_shards,
+    )
+
     pdb_dir = Path(args.pdb_dir)
     output_csv = Path(args.output)
+    base_output = output_csv  # unsuffixed name, used for the shared shard-config marker
     # Keep concurrent shards from writing the same files.
     if args.num_shards > 1:
         output_csv = output_csv.with_name(f"{output_csv.stem}.shard{args.shard_id}{output_csv.suffix}")
+
+    # Guard the strided split against a changed --num_shards on resume. Because a
+    # structure's shard is `index % num_shards`, resuming with a different shard count
+    # reassigns structures to different shards while each shard's .done only covers its
+    # OLD slice -> silent double-computation of some structures and permanent gaps in
+    # others. Record num_shards once next to the output and refuse a mismatched resume.
+    shardmeta = base_output.with_name(f"{base_output.stem}.shardmeta")
+    if shardmeta.exists():
+        try:
+            recorded = int(shardmeta.read_text().strip())
+        except ValueError:
+            recorded = None
+        if recorded is not None and recorded != args.num_shards:
+            raise SystemExit(
+                f"Shard-count mismatch: this dataset was started with --num_shards {recorded}, "
+                f"but you passed --num_shards {args.num_shards}. Resuming with a different shard "
+                f"count corrupts coverage (the strided split reassigns structures). Either re-run "
+                f"with --num_shards {recorded}, or start fresh (remove {shardmeta} and the "
+                f"{base_output.stem}.shard*{base_output.suffix} outputs)."
+            )
+    else:
+        shardmeta.parent.mkdir(parents=True, exist_ok=True)
+        shardmeta.write_text(f"{args.num_shards}\n")
+
     tcr_chains = tuple(c.strip() for c in args.tcr_chains.split(",") if c.strip())
     complex_chains = tuple(c.strip() for c in args.complex_chains.split(",") if c.strip())
     clean_dir = Path(args.clean_dir) if args.clean_dir else pdb_dir / "_clean"

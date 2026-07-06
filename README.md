@@ -67,16 +67,38 @@ nohup uv run generate_tcr_pmhc_dataset.py --output tcr_pmhc_interface_ddg.csv \
 (`|ddG| > --clash_threshold`) are filtered to `<output>_failures.csv`.
 
 **Throughput / parallelism.** The cost is CPU-bound (`create_info_tensors`,
-~0.5 s/mutant) while the GPU stays mostly idle, so run several **shards** that share
-one GPU rather than enlarging the batch. Each shard takes a disjoint slice of the
-PDB list and writes its own `.shardN` CSV (`merge` afterwards by concatenating and
-dropping duplicate headers):
+~0.5 s/mutant) while the GPU stays mostly idle, so run several **shards** rather than
+enlarging the batch. Each shard is one process handling a disjoint strided slice
+(`pdb_files[shard_id::num_shards]`) and writing its own `.shardN` CSV / `.done` /
+`_failures`. **Size shards to CPU cores, not GPUs**: total `--num_shards × --num_workers`
+should ≈ core count. `--num_workers` now **defaults to `(cpu_count−1) ÷ num_shards`**, so
+concurrent shards no longer oversubscribe the box (a single-shard run is unchanged).
+
+Spread shards across GPUs with `CUDA_VISIBLE_DEVICES` (the script always uses `cuda:0`,
+which that env var remaps). Example — 16 shards over 8 GPUs (2 per card) on a 64-core node:
 ```bash
-for s in $(seq 0 15); do
-  CUDA_VISIBLE_DEVICES=0 uv run generate_tcr_pmhc_dataset.py \
-    --num_shards 16 --shard_id "$s" --num_workers 4 \
-    --output tcr_pmhc_interface_ddg.csv > gen.shard$s.log 2>&1 &
+mkdir -p logs
+NGPU=8; SHARDS=16
+for s in $(seq 0 $((SHARDS-1))); do
+  CUDA_VISIBLE_DEVICES=$((s % NGPU)) nohup uv run generate_tcr_pmhc_dataset.py \
+    --num_shards "$SHARDS" --shard_id "$s" \
+    --output tcr_pmhc_interface_ddg.csv --resume \
+    > logs/gen.shard$s.log 2>&1 &
 done
+wait
+```
+Under **SLURM** the shard flags are auto-detected: `sbatch --array=0-15` sets each task's
+`--shard_id`/`--num_shards` from `SLURM_ARRAY_TASK_ID`/`SLURM_ARRAY_TASK_COUNT`.
+
+**Resume safety:** the shard count is recorded in `<output>.shardmeta` on first run;
+resuming with a different `--num_shards` is refused (it would reassign structures across
+shards and corrupt coverage). Resume with the *same* count, or start fresh.
+
+**Merge the shards** when all are done — dedups on `(PDB_ID,Chain,Res,WT,Mut)`:
+```bash
+uv run python merge_shards.py \
+  --output tcr_pmhc_interface_ddg.csv \
+  --pattern "tcr_pmhc_interface_ddg.shard*.csv"
 ```
 
 ## Step 3 — Tier 2: Rosetta Flex ddG (`rosetta_flex/`)
