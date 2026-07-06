@@ -308,11 +308,11 @@ def main() -> None:
     ap.add_argument("--output", type=str, default="rosetta_flex/results/flex_ddg.csv")
     ap.add_argument("--rosetta_bin", type=str, default=os.environ.get("ROSETTA_SCRIPTS_BIN", "rosetta_scripts.default.linuxgccrelease"))
     ap.add_argument("--protocol_xml", type=str, default="rosetta_flex/ddG_backrub.xml")
-    ap.add_argument("--backrub_trials", type=int, default=1500,
-                    help="Backrub MC steps. Default 1500 = throughput-tuned for a <4h / 20k run (see "
-                         "estimate_runtime.py). Graphinity/Hummer 2025 validated 3500 (pass that for the "
-                         "reference-accuracy set); Barlow 2018 used 35000. Below ~1000 risks under-relaxing "
-                         "large mutations, so 1500 is a modest, not aggressive, reduction.")
+    ap.add_argument("--backrub_trials", type=int, default=3500,
+                    help="Backrub MC steps. Default 3500 = Graphinity/Hummer et al. 2025's validated "
+                         "reference-accuracy setting. Barlow 2018 used 35000. Pass 1500 for a throughput-tuned "
+                         "reduction if node/time budget is constrained (see estimate_runtime.py); below ~1000 "
+                         "risks under-relaxing large mutations.")
     ap.add_argument("--nstruct", type=int, default=1,
                     help="Ensemble size. Default 1 (Hummer et al./Graphinity 2025) — vs Barlow 2018's 35. "
                          "The mutant-minus-WT difference cancels most single-model noise; ~35x cheaper. Pass 35 for the full protocol.")

@@ -20,6 +20,11 @@ Typical use on the cluster (after BUILD_ROSETTA.md):
 
 Pre-planning before Rosetta exists (use an assumed rate):
     python rosetta_flex/plan_run.py --minutes_per_mut 12 --max_hours 24
+
+This tool's printed `sbatch` command uses a FIXED node count. For the actual launch, prefer
+`bash rosetta_flex/submit_all_nodes.sh -p <partition>` instead, which sizes the array to
+however many nodes are idle in your partition right now (rather than a number chosen here) --
+use this script to sanity-check expected wall time for that many nodes, not to pick the count.
 """
 from __future__ import annotations
 
@@ -152,15 +157,21 @@ def main() -> None:
                     help="Time this many real mutations to measure min/mut (needs Rosetta built). 0 = skip.")
     ap.add_argument("--minutes_per_mut", type=float, default=12.0,
                     help="Assumed per-mutation wall minutes when --benchmark is not used.")
-    ap.add_argument("--cores_per_node", type=int, default=64, help="Cores per node (UC ARC EPYC = 64).")
-    ap.add_argument("--max_hours", type=float, default=4.0, help="Wall-clock ceiling (tuned target).")
-    ap.add_argument("--max_nodes", type=int, default=13, help="Never plan for more nodes than this (tuned budget).")
+    ap.add_argument("--cores_per_node", type=int, default=64,
+                    help="Cores per node for this ESTIMATE (default 64; actual runs auto-detect "
+                         "the real count per-node via run_node_chunk.sh, so this is just for planning math).")
+    ap.add_argument("--max_hours", type=float, default=8.0, help="Wall-clock ceiling to plan against.")
+    ap.add_argument("--max_nodes", type=int, default=64,
+                    help="Node ceiling for this ESTIMATE's table (submit_all_nodes.sh uses however many "
+                         "nodes are actually idle in your partition, not this value -- raise it here if "
+                         "you just want to see the tradeoff table extend further).")
     ap.add_argument("--margin", type=float, default=1.3, help="Safety multiplier on the estimated wall time.")
     # Rosetta params (only used by --benchmark).
     ap.add_argument("--rosetta_bin", type=str,
                     default="rosetta_scripts.default.linuxgccrelease")
     ap.add_argument("--protocol_xml", type=str, default="rosetta_flex/ddG_backrub.xml")
-    ap.add_argument("--backrub_trials", type=int, default=1500, help="Benchmark at the value you'll run (tuned=1500).")
+    ap.add_argument("--backrub_trials", type=int, default=3500,
+                    help="Benchmark at the value you'll run (default 3500 = Graphinity full accuracy).")
     ap.add_argument("--nstruct", type=int, default=1)
     args = ap.parse_args()
 

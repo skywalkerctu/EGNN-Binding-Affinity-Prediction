@@ -10,10 +10,12 @@
 # Runnable standalone for testing (no SLURM), e.g. a 8-wide dry slice of node 0:
 #   TASK_ID=0 NODES=1 CORES_PER_NODE=8 NJOBS=200 bash rosetta_flex/run_node_chunk.sh
 #
-# All knobs are env vars (defaults chosen for UC ARC 64-core EPYC nodes):
+# All knobs are env vars; CORES_PER_NODE auto-detects the real core count of whatever
+# node this runs on (SLURM's own allocation if set, else nproc/sysctl), so the same
+# script saturates a 64-core UC ARC node, a laptop, or any other box without editing:
 #   TASK_ID              this node's index (default $SLURM_ARRAY_TASK_ID or 0)
 #   NODES                total nodes / array size                     (default 1)
-#   CORES_PER_NODE       parallel workers on this node                (default 64)
+#   CORES_PER_NODE       parallel workers on this node                (default: autodetect)
 #   NJOBS                rows in jobs.csv (auto: wc -l minus header)
 #   JOBS_CSV             (default rosetta_flex/jobs/jobs.csv)
 #   PARTS_DIR            per-job output CSVs                           (default rosetta_flex/results/parts)
@@ -21,7 +23,7 @@
 #   PROTOCOL_XML         (default rosetta_flex/ddG_backrub.xml)
 #   PYTHON               interpreter                                  (default python)
 #   ROSETTA_SCRIPTS_BIN  rosetta_scripts binary                       (default rosetta_scripts.default.linuxgccrelease)
-#   BACKRUB_TRIALS       backrub MC steps (default 1500 tuned <4h; 3500 = Graphinity)   NSTRUCT (default 1)
+#   BACKRUB_TRIALS       backrub MC steps (default 3500 = Graphinity full accuracy; 1500 = throughput-tuned)   NSTRUCT (default 1)
 #   GAM_COEFFS           optional {score_type: weight} JSON (empty => nogam / total_score)
 #   KEEP_WORKDIR         non-empty => keep each job's Rosetta scratch dir (structures, ddG.db3,
 #                        struct.db3) after success, for debugging. Default deletes it (unbounded
@@ -33,7 +35,19 @@ cd "$PROJECT_DIR"
 
 export TASK_ID="${TASK_ID:-${SLURM_ARRAY_TASK_ID:-0}}"
 export NODES="${NODES:-1}"
-export CORES_PER_NODE="${CORES_PER_NODE:-64}"
+# Auto-detect this node's real core count so every core gets used regardless of
+# platform, preferring SLURM's own allocation (respects --cpus-per-task/cgroup limits,
+# so we never oversubscribe a partial-node allocation) over raw hardware core count:
+#   1. SLURM_CPUS_PER_TASK / SLURM_JOB_CPUS_PER_NODE -- set by sbatch/srun.
+#   2. nproc (Linux) or sysctl -n hw.ncpu (macOS, for local dev/testing).
+#   3. 64 as a last-resort fallback if neither tool exists.
+if [ -z "${CORES_PER_NODE:-}" ]; then
+    CORES_PER_NODE="${SLURM_CPUS_PER_TASK:-${SLURM_JOB_CPUS_PER_NODE:-}}"
+    if [ -z "$CORES_PER_NODE" ]; then
+        CORES_PER_NODE="$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 64)"
+    fi
+fi
+export CORES_PER_NODE
 export JOBS_CSV="${JOBS_CSV:-rosetta_flex/jobs/jobs.csv}"
 export PARTS_DIR="${PARTS_DIR:-rosetta_flex/results/parts}"
 export WORK_DIR="${WORK_DIR:-rosetta_flex/results/work}"
@@ -50,7 +64,7 @@ if [ -z "${PYTHON:-}" ]; then
 fi
 export PYTHON
 export ROSETTA_SCRIPTS_BIN="${ROSETTA_SCRIPTS_BIN:-rosetta_scripts.default.linuxgccrelease}"
-export BACKRUB_TRIALS="${BACKRUB_TRIALS:-1500}"   # tuned <4h default; 3500 = Graphinity full accuracy
+export BACKRUB_TRIALS="${BACKRUB_TRIALS:-3500}"   # Graphinity full-accuracy default; 1500 = throughput-tuned
 export NSTRUCT="${NSTRUCT:-1}"
 export GAM_COEFFS="${GAM_COEFFS:-}"
 

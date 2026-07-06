@@ -107,17 +107,16 @@ Backbone-flexible ΔΔG via the Flex ddG protocol
 ([Barlow et al. 2018](https://pubs.acs.org/doi/10.1021/acs.jpcb.7b11367)), on the
 **same** structures. Needs a compiled Rosetta binary (built on ARC — see
 [`rosetta_flex/README.md`](rosetta_flex/README.md)). On ARC, one SLURM array task owns one
-64-core node and packs it with `xargs -P` (all cores); locally the same node script runs
-standalone across all local cores.
+whole node and packs all of its cores with `xargs -P` (auto-detected, not hardcoded); locally
+the same node script runs standalone across all local cores.
 ```bash
 uv run python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ --out_dir rosetta_flex/jobs
 
-# ARC — one exclusive node per task, all 64 cores packed per node:
-sbatch rosetta_flex/submit_array.sbatch          # override --array=0-<NODES-1> to add nodes
+# ARC — uses every node currently idle in your partition (see rosetta_flex/README.md):
+bash rosetta_flex/submit_all_nodes.sh -p <partition>
 
 # Local — fill all local cores on one machine (needs a local Rosetta build):
-CORES_PER_NODE=$(sysctl -n hw.ncpu 2>/dev/null || nproc) NODES=1 TASK_ID=0 \
-    bash rosetta_flex/run_node_chunk.sh
+NODES=1 TASK_ID=0 bash rosetta_flex/run_node_chunk.sh
 
 uv run python rosetta_flex/merge_results.py
 ```

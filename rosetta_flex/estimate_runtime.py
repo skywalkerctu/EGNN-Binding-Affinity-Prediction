@@ -161,7 +161,7 @@ def main() -> None:
     ap.add_argument("--project_samples", type=int, default=None,
                     help="Report totals for this many jobs (default: actual jobs.csv rows). Use to "
                          "project a few parsed structures to the full run.")
-    ap.add_argument("--ntrials", type=int, default=1500, help="backrub trials for THIS run (tuned <4h default; 3500 = Graphinity).")
+    ap.add_argument("--ntrials", type=int, default=3500, help="backrub trials for THIS run (default 3500 = Graphinity full accuracy).")
     ap.add_argument("--neighborhood_radius", type=float, default=8.0, help="8 A matches the protocol.")
     # Literature anchor (central per-mutation minutes at the reference size/ntrials).
     ap.add_argument("--anchor_min_per_mut", type=float, default=12.0)
@@ -172,8 +172,10 @@ def main() -> None:
                     help="If given, rescale so the predicted MEAN equals this measured value (exact anchor).")
     # Cluster / target.
     ap.add_argument("--cores_per_node", type=int, default=64)
-    ap.add_argument("--target_hours", type=float, default=4.0, help="Wall-clock ceiling to optimise for.")
-    ap.add_argument("--max_nodes", type=int, default=13, help="Node budget (UC ARC tuned <4h point = 13).")
+    ap.add_argument("--target_hours", type=float, default=8.0, help="Wall-clock ceiling to optimise for.")
+    ap.add_argument("--max_nodes", type=int, default=64,
+                    help="Node ceiling for this ESTIMATE's tradeoff table (submit_all_nodes.sh sizes "
+                         "the real launch off whatever's actually idle in your partition, not this).")
     ap.add_argument("--margin", type=float, default=1.2, help="Safety multiplier on estimated wall time.")
     ap.add_argument("--ntrials_grid", type=str, default="3500,2500,2000,1500,1000,750",
                     help="ntrials values to show in the <target_hours> tradeoff table.")
