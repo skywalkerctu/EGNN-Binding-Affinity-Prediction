@@ -1,0 +1,288 @@
+pdb_id,chains,peptide,mhc_allele,resolution,cluster_key,out_path
+1d9k,"E->D,F->E,G->A,H->B,Q->C",conalbumin peptide,MH2,3.2,CONALBUMIN PEPTIDE|MH2|E|F,stcrdab_structures/1d9k.pdb
+1d9k,"A->D,B->E,C->A,D->B,P->C",conalbumin peptide,MH2,3.2,CONALBUMIN PEPTIDE|MH2|A|B,stcrdab_structures/1d9k.pdb
+1kj2,"D->D,E->E,I->A,M->B,Q->C",naturally processed octapeptide pkb1,MH1,2.71,NATURALLY PROCESSED OCTAPEPTIDE PKB1|MH1|D|E,stcrdab_structures/1kj2.pdb
+1kj2,"A->D,B->E,H->A,L->B,P->C",naturally processed octapeptide pkb1,MH1,2.71,NATURALLY PROCESSED OCTAPEPTIDE PKB1|MH1|A|B,stcrdab_structures/1kj2.pdb
+1u3h,"E->D,F->E,G->A,H->B,I->C",myelin basic protein (mbp)-peptide,MH2,2.42,MYELIN BASIC PROTEIN (MBP)-PEPTIDE|MH2|E|F,stcrdab_structures/1u3h.pdb
+2ckb,"C->D,D->E,I->A,M->B,Q->C",dev8 peptide,MH1,3,DEV8 PEPTIDE|MH1|C|D,stcrdab_structures/2ckb.pdb
+2ckb,"A->D,B->E,H->A,L->B,P->C",dev8 peptide,MH1,3,DEV8 PEPTIDE|MH1|A|B,stcrdab_structures/2ckb.pdb
+2e7l,"B->D,C->E,F->A,P->C",peptide (gln)(leu)(ser)(pro)(phe)(pro)(phe)(asp)(leu),MH1,2.5,PEPTIDE (GLN)(LEU)(SER)(PRO)(PHE)(PRO)(PHE)(ASP)(LEU)|MH1|B|C,stcrdab_structures/2e7l.pdb
+2e7l,"A->D,D->E,E->A,Q->C",peptide (gln)(leu)(ser)(pro)(phe)(pro)(phe)(asp)(leu),MH1,2.5,PEPTIDE (GLN)(LEU)(SER)(PRO)(PHE)(PRO)(PHE)(ASP)(LEU)|MH1|A|D,stcrdab_structures/2e7l.pdb
+2j8u,"H->A,I->B,J->C,L->D,M->E",self-peptide p1049,MH1,2.88,SELF-PEPTIDE P1049|MH1|L|M,stcrdab_structures/2j8u.pdb
+2j8u,"A->A,B->B,C->C,E->D,F->E",self-peptide p1049,MH1,2.88,SELF-PEPTIDE P1049|MH1|E|F,stcrdab_structures/2j8u.pdb
+2jcc,"A->A,B->B,C->C,E->D,F->E",p1049,MH1,2.5,P1049|MH1|E|F,stcrdab_structures/2jcc.pdb
+2jcc,"H->A,I->B,J->C,L->D,M->E",p1049,MH1,2.5,P1049|MH1|L|M,stcrdab_structures/2jcc.pdb
+2pxy,"A->D,B->E,C->A,D->B,P->C",myelin basic protein (mbp)-peptide,MH2,2.23,MYELIN BASIC PROTEIN (MBP)-PEPTIDE|MH2|A|B,stcrdab_structures/2pxy.pdb
+3arb,"A->C,B->B,C->D,D->E","N-{(1S,2S,3R)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYOCTYL}TETRACOSANAMIDE",CD1,2.7,"N-{(1S,2S,3R)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYOCTYL}TETRACOSANAMIDE|CD1|C|D",stcrdab_structures/3arb.pdb
+3ard,"A->C,B->B,C->D,D->E","N-{(2S,3R)-1-[(3-DEOXY-ALPHA-D-XYLO-HEXOPYRANOSYL)OXY]-3-HYDROXYOCTADECAN-2-YL}HEXACOSANAMIDE",CD1,3.01,"N-{(2S,3R)-1-[(3-DEOXY-ALPHA-D-XYLO-HEXOPYRANOSYL)OXY]-3-HYDROXYOCTADECAN-2-YL}HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3ard.pdb
+3are,"A->C,B->B,C->D,D->E","N-{(2S,3R)-1-[(4-DEOXY-ALPHA-D-XYLO-HEXOPYRANOSYL)OXY]-3-HYDROXYOCTADECAN-2-YL}HEXACOSANAMIDE",CD1,2.8,"N-{(2S,3R)-1-[(4-DEOXY-ALPHA-D-XYLO-HEXOPYRANOSYL)OXY]-3-HYDROXYOCTADECAN-2-YL}HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3are.pdb
+3arf,"A->C,B->B,C->D,D->E","(11Z,14E)-N-[(2S,3S,4R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]ICOSA-11,14-DIENAMIDE",CD1,2.9,"(11Z,14E)-N-[(2S,3S,4R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]ICOSA-11,14-DIENAMIDE|CD1|C|D",stcrdab_structures/3arf.pdb
+3arg,"A->C,B->B,C->D,D->E","(11E,14E)-N-[(2S,3S,4R)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]ICOSA-11,14-DIENAMIDE",CD1,3,"(11E,14E)-N-[(2S,3S,4R)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]ICOSA-11,14-DIENAMIDE|CD1|C|D",stcrdab_structures/3arg.pdb
+3d39,"A->A,B->B,C->C,D->D,E->E",modified htlv-1 tax (y5(4fluoro)f) peptide,MH1,2.81,MODIFIED HTLV-1 TAX (Y5(4FLUORO)F) PEPTIDE|MH1|D|E,stcrdab_structures/3d39.pdb
+3he7,"A->C,B->B,C->D,D->E","N-{(1S,2R,3S)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYHEPTADECYL}HEXACOSANAMIDE",CD1,2.8,"N-{(1S,2R,3S)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYHEPTADECYL}HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3he7.pdb
+3huj,"A->C,B->B,G->D,H->E","N-{(1S,2R,3S)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYHEPTADECYL}HEXACOSANAMIDE",CD1,2.5,"N-{(1S,2R,3S)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYHEPTADECYL}HEXACOSANAMIDE|CD1|G|H",stcrdab_structures/3huj.pdb
+3huj,"C->C,D->B,E->D,F->E","N-{(1S,2R,3S)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYHEPTADECYL}HEXACOSANAMIDE",CD1,2.5,"N-{(1S,2R,3S)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYHEPTADECYL}HEXACOSANAMIDE|CD1|E|F",stcrdab_structures/3huj.pdb
+3mbe,"E->A,F->B,G->D,H->E,Q->C",peptide hel 11-27,MH2,2.886,PEPTIDE HEL 11-27|MH2|G|H,stcrdab_structures/3mbe.pdb
+3mbe,"A->A,B->B,C->D,D->E,P->C",peptide hel 11-27,MH2,2.886,PEPTIDE HEL 11-27|MH2|C|D,stcrdab_structures/3mbe.pdb
+3o8x,"A->C,B->B,C->D,D->E","(2S,3R)-3-HYDROXY-2-(TETRADECANOYLAMINO)OCTADECYL ALPHA-D-GALACTOPYRANOSIDURONIC ACID",CD1,2.74,"(2S,3R)-3-HYDROXY-2-(TETRADECANOYLAMINO)OCTADECYL ALPHA-D-GALACTOPYRANOSIDURONIC ACID|CD1|C|D",stcrdab_structures/3o8x.pdb
+3o9w,"A->C,B->B,C->D,D->E",(2S)-3-(ALPHA-D-GALACTOPYRANOSYLOXY)-2-(HEXADECANOYLOXY)PROPYL (9Z)-OCTADEC-9-ENOATE,CD1,2.8,(2S)-3-(ALPHA-D-GALACTOPYRANOSYLOXY)-2-(HEXADECANOYLOXY)PROPYL (9Z)-OCTADEC-9-ENOATE|CD1|C|D,stcrdab_structures/3o9w.pdb
+3pqy,"P->A,Q->B,R->C,S->D,T->E",10-mer peptide from rna-directed rna polymerase,MH1,3.192,10-MER PEPTIDE FROM RNA-DIRECTED RNA POLYMERASE|MH1|S|T,stcrdab_structures/3pqy.pdb
+3pqy,"A->A,B->B,C->C,D->D,E->E",10-mer peptide from rna-directed rna polymerase,MH1,3.192,10-MER PEPTIDE FROM RNA-DIRECTED RNA POLYMERASE|MH1|D|E,stcrdab_structures/3pqy.pdb
+3pqy,"K->A,L->B,M->C,N->D,O->E",10-mer peptide from rna-directed rna polymerase,MH1,3.192,10-MER PEPTIDE FROM RNA-DIRECTED RNA POLYMERASE|MH1|N|O,stcrdab_structures/3pqy.pdb
+3pqy,"F->A,G->B,H->C,I->D,J->E",10-mer peptide from rna-directed rna polymerase,MH1,3.192,10-MER PEPTIDE FROM RNA-DIRECTED RNA POLYMERASE|MH1|I|J,stcrdab_structures/3pqy.pdb
+3qi9,"A->C,B->B,C->D,D->E","2-[(HYDROXY{[(2R,3R,5S,6R)-2,3,4,5,6-PENTAHYDROXYCYCLOHEXYL]OXY}PHOSPHORYL)OXY]-1-[(PALMITOYLOXY)METHYL]ETHYL HEPTADECANOATE",CD1,2.3,"2-[(HYDROXY{[(2R,3R,5S,6R)-2,3,4,5,6-PENTAHYDROXYCYCLOHEXYL]OXY}PHOSPHORYL)OXY]-1-[(PALMITOYLOXY)METHYL]ETHYL HEPTADECANOATE|CD1|C|D",stcrdab_structures/3qi9.pdb
+3qux,"A->C,B->B,C->D,D->E","N-[(3S,4S,5R)-4,5-DIHYDROXY-1-[(2R,3R,4R,5R,6R)-3,4,5-TRIHYDROXY-6-(HYDROXYMETHYL)OXAN-2-YL]NONADECAN-3-YL]HEXACOSANAMIDE",CD1,2.91,"N-[(3S,4S,5R)-4,5-DIHYDROXY-1-[(2R,3R,4R,5R,6R)-3,4,5-TRIHYDROXY-6-(HYDROXYMETHYL)OXAN-2-YL]NONADECAN-3-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3qux.pdb
+3quy,"A->C,B->B,C->D,D->E","(2S,3R,4S,5R,6S)-6-[(2S,3S,4R)-2-(HEXACOSANOYLAMINO)-3,4-DIHYDROXY-OCTADECOXY]-3,4,5-TRIHYDROXY-N-(PHENYLMETHYL)OXANE-2-CARBOXAMIDE",CD1,2.25,"(2S,3R,4S,5R,6S)-6-[(2S,3S,4R)-2-(HEXACOSANOYLAMINO)-3,4-DIHYDROXY-OCTADECOXY]-3,4,5-TRIHYDROXY-N-(PHENYLMETHYL)OXANE-2-CARBOXAMIDE|CD1|C|D",stcrdab_structures/3quy.pdb
+3quz,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-1-({6-DEOXY-6-[(NAPHTHALEN-1-YLCARBAMOYL)AMINO]-ALPHA-D-GALACTOPYRANOSYL}OXY)-3,4-DIHYDROXYOCTADECAN-2-YL]HEXACOSANAMIDE",CD1,2.3,"N-[(2S,3S,4R)-1-({6-DEOXY-6-[(NAPHTHALEN-1-YLCARBAMOYL)AMINO]-ALPHA-D-GALACTOPYRANOSYL}OXY)-3,4-DIHYDROXYOCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3quz.pdb
+3rtq,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-3,4-DIHYDROXY-1-{[(1S,2S,3R,4R,5S)-2,3,4,5-TETRAHYDROXYCYCLOHEXYL]AMINO}OCTADECAN-2-YL]HEXACOSANAMIDE",CD1,2.8,"N-[(2S,3S,4R)-3,4-DIHYDROXY-1-{[(1S,2S,3R,4R,5S)-2,3,4,5-TETRAHYDROXYCYCLOHEXYL]AMINO}OCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3rtq.pdb
+3rug,"C->C,D->B,G->D,H->E","(11E,14E)-N-[(2S,3S,4R)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]ICOSA-11,14-DIENAMIDE",CD1,2.2,"(11E,14E)-N-[(2S,3S,4R)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]ICOSA-11,14-DIENAMIDE|CD1|G|H",stcrdab_structures/3rug.pdb
+3rug,"A->C,B->B,E->D,F->E","(11E,14E)-N-[(2S,3S,4R)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]ICOSA-11,14-DIENAMIDE",CD1,2.2,"(11E,14E)-N-[(2S,3S,4R)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]ICOSA-11,14-DIENAMIDE|CD1|E|F",stcrdab_structures/3rug.pdb
+3scm,"A->C,B->B,C->D,D->E","N-[(2S,3R,4E)-1-{[ALPHA-D-GALACTOPYRANOSYL-(1->3)-BETA-D-GALACTOPYRANOSYL-(1->4)-BETA-D-GLUCOPYRANOSYL]OXY}-3-HYDROXYOCTADEC-4-EN-2-YL]HEXACOSANAMIDE",CD1,2.5,"N-[(2S,3R,4E)-1-{[ALPHA-D-GALACTOPYRANOSYL-(1->3)-BETA-D-GALACTOPYRANOSYL-(1->4)-BETA-D-GLUCOPYRANOSYL]OXY}-3-HYDROXYOCTADEC-4-EN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3scm.pdb
+3sda,"A->C,B->B,C->D,D->E","N-[(2S,3R)-1-(BETA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYOCTADEC-4-EN-2-YL]TETRACOSANAMIDE",CD1,2.8,"N-[(2S,3R)-1-(BETA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYOCTADEC-4-EN-2-YL]TETRACOSANAMIDE|CD1|C|D",stcrdab_structures/3sda.pdb
+3sdc,"A->C,B->B,C->D,D->E","N-[(2S,3R,4E)-1-{[ALPHA-D-GALACTOPYRANOSYL-(1->4)-BETA-D-GALACTOPYRANOSYL-(1->4)-BETA-D-GLUCOPYRANOSYL]OXY}-3-HYDROXYOCTADEC-4-EN-2-YL]HEXACOSANAMIDE",CD1,3.1,"N-[(2S,3R,4E)-1-{[ALPHA-D-GALACTOPYRANOSYL-(1->4)-BETA-D-GALACTOPYRANOSYL-(1->4)-BETA-D-GLUCOPYRANOSYL]OXY}-3-HYDROXYOCTADEC-4-EN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3sdc.pdb
+3sdd,"A->C,B->B,C->D,D->E","N-[(2S,3R,4E)-1-{[4-O-(BETA-D-GALACTOPYRANOSYL)-BETA-D-GLUCOPYRANOSYL]OXY}-3-HYDROXYOCTADEC-4-EN-2-YL]DOCOSANAMIDE",CD1,3,"N-[(2S,3R,4E)-1-{[4-O-(BETA-D-GALACTOPYRANOSYL)-BETA-D-GLUCOPYRANOSYL]OXY}-3-HYDROXYOCTADEC-4-EN-2-YL]DOCOSANAMIDE|CD1|C|D",stcrdab_structures/3sdd.pdb
+3sdx,"A->C,B->B,E->D,F->E","N-[(2S,3R)-1-(BETA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYOCTADEC-4-EN-2-YL]TETRACOSANAMIDE",CD1,3.12,"N-[(2S,3R)-1-(BETA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYOCTADEC-4-EN-2-YL]TETRACOSANAMIDE|CD1|E|F",stcrdab_structures/3sdx.pdb
+3sdx,"C->C,D->B,G->D,H->E","N-[(2S,3R)-1-(BETA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYOCTADEC-4-EN-2-YL]TETRACOSANAMIDE",CD1,3.12,"N-[(2S,3R)-1-(BETA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYOCTADEC-4-EN-2-YL]TETRACOSANAMIDE|CD1|G|H",stcrdab_structures/3sdx.pdb
+3ta3,"A->C,B->B,C->D,D->E",(2S)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3-(HEXADECANOYLOXY)PROPAN-2-YL (11Z)-OCTADEC-11-ENOATE,CD1,2.7,(2S)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3-(HEXADECANOYLOXY)PROPAN-2-YL (11Z)-OCTADEC-11-ENOATE|CD1|C|D,stcrdab_structures/3ta3.pdb
+3tfk,"A->A,B->C,C->D,D->E",p4b10 peptide,MH1,2.753,P4B10 PEPTIDE|MH1|C|D,stcrdab_structures/3tfk.pdb
+3tvm,"A->C,B->B,C->D,D->E","N-[(2S,3R)-10-[(1R,2R)-2-DECYLCYCLOPROPYL]-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYDECAN-2-YL]HEXACOSANAMIDE",CD1,2.8,"N-[(2S,3R)-10-[(1R,2R)-2-DECYLCYCLOPROPYL]-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYDECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/3tvm.pdb
+3tvm,"E->C,F->B,G->D,H->E","N-[(2S,3R)-10-[(1R,2R)-2-DECYLCYCLOPROPYL]-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYDECAN-2-YL]HEXACOSANAMIDE",CD1,2.8,"N-[(2S,3R)-10-[(1R,2R)-2-DECYLCYCLOPROPYL]-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYDECAN-2-YL]HEXACOSANAMIDE|CD1|G|H",stcrdab_structures/3tvm.pdb
+3tzv,"C->C,D->B,G->D,H->E","(4R,7R,18E)-4,7-DIHYDROXY-N,N,N-TRIMETHYL-10-OXO-3,5,9-TRIOXA-4-PHOSPHAHEPTACOS-18-EN-1-AMINIUM 4-OXIDE",CD1,3.056,"(4R,7R,18E)-4,7-DIHYDROXY-N,N,N-TRIMETHYL-10-OXO-3,5,9-TRIOXA-4-PHOSPHAHEPTACOS-18-EN-1-AMINIUM 4-OXIDE|CD1|G|H",stcrdab_structures/3tzv.pdb
+3uts,"A->A,B->B,C->C,D->D,E->E",insulin,MH1,2.712,INSULIN|MH1|D|E,stcrdab_structures/3uts.pdb
+3uts,"F->A,G->B,H->C,I->D,J->E",insulin,MH1,2.712,INSULIN|MH1|I|J,stcrdab_structures/3uts.pdb
+3w0w,"A->A,B->B,C->C,D->D,E->E",10-mer peptide from protein nef,MH1,2.603,10-MER PEPTIDE FROM PROTEIN NEF|MH1|D|E,stcrdab_structures/3w0w.pdb
+4apq,"A->C,B->B,C->D,D->E","(15Z)-N-((1S,2R,3E)-2-HYDROXY-1-{[(3-O-SULFO-BETA-D-GALACTOPYRANOSYL)OXY]METHYL}HEPTADEC-3-ENYL)TETRACOS-15-ENAMIDE",CD1,3,"(15Z)-N-((1S,2R,3E)-2-HYDROXY-1-{[(3-O-SULFO-BETA-D-GALACTOPYRANOSYL)OXY]METHYL}HEPTADEC-3-ENYL)TETRACOS-15-ENAMIDE|CD1|C|D",stcrdab_structures/4apq.pdb
+4e41,"A->A,B->B,C->C,D->D,E->E",triosephosphate isomerase,MH2,2.6,TRIOSEPHOSPHATE ISOMERASE|MH2|D|E,stcrdab_structures/4e41.pdb
+4e41,"F->A,G->B,H->C,I->D,J->E",triosephosphate isomerase,MH2,2.6,TRIOSEPHOSPHATE ISOMERASE|MH2|I|J,stcrdab_structures/4e41.pdb
+4ei5,"A->C,B->B,C->D,D->E,I->C","(15Z)-N-((1S,2R,3E)-2-HYDROXY-1-{[(3-O-SULFO-BETA-D-GALACTOPYRANOSYL)OXY]METHYL}HEPTADEC-3-ENYL)TETRACOS-15-ENAMIDE | N-ACETYL-D-GLUCOSAMINE",CD1,3.1,"(15Z)-N-((1S,2R,3E)-2-HYDROXY-1-{[(3-O-SULFO-BETA-D-GALACTOPYRANOSYL)OXY]METHYL}HEPTADEC-3-ENYL)TETRACOS-15-ENAMIDE | N-ACETYL-D-GLUCOSAMINE|CD1|C|D",stcrdab_structures/4ei5.pdb
+4ei5,"E->C,F->B,G->D,H->E,K->C","(15Z)-N-((1S,2R,3E)-2-HYDROXY-1-{[(3-O-SULFO-BETA-D-GALACTOPYRANOSYL)OXY]METHYL}HEPTADEC-3-ENYL)TETRACOS-15-ENAMIDE | N-ACETYL-D-GLUCOSAMINE",CD1,3.1,"(15Z)-N-((1S,2R,3E)-2-HYDROXY-1-{[(3-O-SULFO-BETA-D-GALACTOPYRANOSYL)OXY]METHYL}HEPTADEC-3-ENYL)TETRACOS-15-ENAMIDE | N-ACETYL-D-GLUCOSAMINE|CD1|G|H",stcrdab_structures/4ei5.pdb
+4elm,"A->C,B->B,G->D,H->E","(2S,3R,4E)-2-AMINO-3-HYDROXYOCTADEC-4-EN-1-YL 3-O-SULFO-BETA-D-GALACTOPYRANOSIDE",CD1,3.48,"(2S,3R,4E)-2-AMINO-3-HYDROXYOCTADEC-4-EN-1-YL 3-O-SULFO-BETA-D-GALACTOPYRANOSIDE|CD1|G|H",stcrdab_structures/4elm.pdb
+4elm,"C->C,D->B,E->D,F->E","(2S,3R,4E)-2-AMINO-3-HYDROXYOCTADEC-4-EN-1-YL 3-O-SULFO-BETA-D-GALACTOPYRANOSIDE",CD1,3.48,"(2S,3R,4E)-2-AMINO-3-HYDROXYOCTADEC-4-EN-1-YL 3-O-SULFO-BETA-D-GALACTOPYRANOSIDE|CD1|E|F",stcrdab_structures/4elm.pdb
+4en3,"A->D,B->E,C->C,D->B","N-{(1S,2R,3S)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYHEPTADECYL}HEXACOSANAMIDE",CD1,2.568,"N-{(1S,2R,3S)-1-[(ALPHA-D-GALACTOPYRANOSYLOXY)METHYL]-2,3-DIHYDROXYHEPTADECYL}HEXACOSANAMIDE|CD1|A|B",stcrdab_structures/4en3.pdb
+4irj,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-1-({6-O-[(4-chlorophenyl)carbamoyl]-alpha-D-galactopyranosyl}oxy)-3,4-dihydroxyoctadecan-2-yl]hexacosanamide",CD1,3,"N-[(2S,3S,4R)-1-({6-O-[(4-CHLOROPHENYL)CARBAMOYL]-ALPHA-D-GALACTOPYRANOSYL}OXY)-3,4-DIHYDROXYOCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/4irj.pdb
+4irs,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-3,4-dihydroxy-1-{[6-O-(pyridin-4-ylcarbamoyl)-alpha-D-galactopyranosyl]oxy}octadecan-2-yl]hexacosanamide",CD1,2.8,"N-[(2S,3S,4R)-3,4-DIHYDROXY-1-{[6-O-(PYRIDIN-4-YLCARBAMOYL)-ALPHA-D-GALACTOPYRANOSYL]OXY}OCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/4irs.pdb
+4l4t,"A->C,B->B,G->D,H->E","2-AMINO-4-OXO-3,4-DIHYDROPTERIDINE-6-CARBALDEHYDE",MR1,2,"2-AMINO-4-OXO-3,4-DIHYDROPTERIDINE-6-CARBALDEHYDE|MR1|G|H",stcrdab_structures/4l4t.pdb
+4l4t,"C->C,D->D,E->E,F->B","2-AMINO-4-OXO-3,4-DIHYDROPTERIDINE-6-CARBALDEHYDE",MR1,2,"2-AMINO-4-OXO-3,4-DIHYDROPTERIDINE-6-CARBALDEHYDE|MR1|D|E",stcrdab_structures/4l4t.pdb
+4l4v,"A->C,B->B,G->D,H->E","1-deoxy-1-(7-hydroxy-6-methyl-2,4-dioxo-3,4-dihydropteridin-8(2H)-yl)-D-ribitol",MR1,1.9,"1-DEOXY-1-(7-HYDROXY-6-METHYL-2,4-DIOXO-3,4-DIHYDROPTERIDIN-8(2H)-YL)-D-RIBITOL|MR1|G|H",stcrdab_structures/4l4v.pdb
+4l4v,"C->C,D->D,E->E,F->B","1-deoxy-1-(7-hydroxy-6-methyl-2,4-dioxo-3,4-dihydropteridin-8(2H)-yl)-D-ribitol",MR1,1.9,"1-DEOXY-1-(7-HYDROXY-6-METHYL-2,4-DIOXO-3,4-DIHYDROPTERIDIN-8(2H)-YL)-D-RIBITOL|MR1|D|E",stcrdab_structures/4l4v.pdb
+4ms8,"A->A,B->C,C->D,D->E",pcpb9,MH1,1.922,PCPB9|MH1|C|D,stcrdab_structures/4ms8.pdb
+4mvb,"A->A,B->C,C->D,D->E",pcpb7,MH1,3.088,PCPB7|MH1|C|D,stcrdab_structures/4mvb.pdb
+4mxq,"A->A,B->C,C->D,D->E",pcpc5,MH1,2.596,PCPC5|MH1|C|D,stcrdab_structures/4mxq.pdb
+4n0c,"E->A,F->C,G->D,H->E",pcpe3,MH1,2.9,PCPE3|MH1|G|H,stcrdab_structures/4n0c.pdb
+4n0c,"A->A,B->C,C->D,D->E",pcpe3,MH1,2.9,PCPE3|MH1|C|D,stcrdab_structures/4n0c.pdb
+4n5e,"A->A,B->C,C->D,D->E",pcpa12,MH1,3.059,PCPA12|MH1|C|D,stcrdab_structures/4n5e.pdb
+4nqe,"A->C,B->B,G->D,H->E","1-deoxy-1-({2,6-dioxo-5-[(E)-(2-oxoethylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-ribitol",MR1,2.1,"1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOETHYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|G|H",stcrdab_structures/4nqe.pdb
+4nqe,"C->C,D->D,E->E,F->B","1-deoxy-1-({2,6-dioxo-5-[(E)-(2-oxoethylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-ribitol",MR1,2.1,"1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOETHYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|D|E",stcrdab_structures/4nqe.pdb
+4p2o,"A->A,B->B,C->D,D->E,P->C",2a peptide,MH2,2.603,2A PEPTIDE|MH2|C|D,stcrdab_structures/4p2o.pdb
+4p2q,"F->A,G->B,H->C,I->D,J->E",5c2 peptide,MH2,3.3,5C2 PEPTIDE|MH2|I|J,stcrdab_structures/4p2q.pdb
+4p2q,"K->A,L->B,M->C,N->D,O->E",5c2 peptide,MH2,3.3,5C2 PEPTIDE|MH2|N|O,stcrdab_structures/4p2q.pdb
+4p2q,"A->A,B->B,C->C,D->D,E->E",5c2 peptide,MH2,3.3,5C2 PEPTIDE|MH2|D|E,stcrdab_structures/4p2q.pdb
+4p2q,"P->A,Q->B,R->C,S->D,T->E",5c2 peptide,MH2,3.3,5C2 PEPTIDE|MH2|S|T,stcrdab_structures/4p2q.pdb
+4p2r,"K->A,L->B,M->C,N->D,O->E",5c1 peptide,MH2,3.295,5C1 PEPTIDE|MH2|N|O,stcrdab_structures/4p2r.pdb
+4p2r,"F->A,G->B,H->C,I->D,J->E",5c1 peptide,MH2,3.295,5C1 PEPTIDE|MH2|I|J,stcrdab_structures/4p2r.pdb
+4p2r,"P->A,Q->B,R->C,S->D,T->E",5c1 peptide,MH2,3.295,5C1 PEPTIDE|MH2|S|T,stcrdab_structures/4p2r.pdb
+4p2r,"A->A,B->B,C->C,D->D,E->E",5c1 peptide,MH2,3.295,5C1 PEPTIDE|MH2|D|E,stcrdab_structures/4p2r.pdb
+4pj5,"C->C,D->D,E->E,F->B","N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE",MR1,2,"N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE|MR1|D|E",stcrdab_structures/4pj5.pdb
+4pj9,"A->C,B->B,C->D,D->E","1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL",MR1,2,"1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|C|D",stcrdab_structures/4pj9.pdb
+4pjc,"C->C,D->B,G->D,H->E","2-[3-(2-HYDROXY-1,1-DIHYDROXYMETHYL-ETHYLAMINO)-PROPYLAMINO]-2-HYDROXYMETHYL-PROPANE-1,3-DIOL | 1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL",MR1,2.5,"2-[3-(2-HYDROXY-1,1-DIHYDROXYMETHYL-ETHYLAMINO)-PROPYLAMINO]-2-HYDROXYMETHYL-PROPANE-1,3-DIOL | 1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|G|H",stcrdab_structures/4pjc.pdb
+4pjc,"A->C,B->B,E->D,F->E","2-[3-(2-HYDROXY-1,1-DIHYDROXYMETHYL-ETHYLAMINO)-PROPYLAMINO]-2-HYDROXYMETHYL-PROPANE-1,3-DIOL | 1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL",MR1,2.5,"2-[3-(2-HYDROXY-1,1-DIHYDROXYMETHYL-ETHYLAMINO)-PROPYLAMINO]-2-HYDROXYMETHYL-PROPANE-1,3-DIOL | 1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|E|F",stcrdab_structures/4pjc.pdb
+4pje,"C->C,D->B,G->D,H->E","N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE",MR1,1.95,"N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE|MR1|G|H",stcrdab_structures/4pje.pdb
+4pje,"A->C,B->B,E->D,F->E","N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE",MR1,1.95,"N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE|MR1|E|F",stcrdab_structures/4pje.pdb
+4pjx,"C->C,D->B,G->D,H->E","2-[3-(2-HYDROXY-1,1-DIHYDROXYMETHYL-ETHYLAMINO)-PROPYLAMINO]-2-HYDROXYMETHYL-PROPANE-1,3-DIOL | N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE",MR1,2.25,"2-[3-(2-HYDROXY-1,1-DIHYDROXYMETHYL-ETHYLAMINO)-PROPYLAMINO]-2-HYDROXYMETHYL-PROPANE-1,3-DIOL | N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE|MR1|G|H",stcrdab_structures/4pjx.pdb
+4pjx,"A->C,B->B,E->D,F->E","2-[3-(2-HYDROXY-1,1-DIHYDROXYMETHYL-ETHYLAMINO)-PROPYLAMINO]-2-HYDROXYMETHYL-PROPANE-1,3-DIOL | N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE",MR1,2.25,"2-[3-(2-HYDROXY-1,1-DIHYDROXYMETHYL-ETHYLAMINO)-PROPYLAMINO]-2-HYDROXYMETHYL-PROPANE-1,3-DIOL | N-(6-FORMYL-4-OXO-3,4-DIHYDROPTERIDIN-2-YL)ACETAMIDE|MR1|E|F",stcrdab_structures/4pjx.pdb
+4ww2,"A->D,B->E,C->C,F->B","(15Z)-N-[(2S,3S,4R)-1-(alpha-D-galactopyranosyloxy)-3,4-dihydroxyoctadecan-2-yl]tetracos-15-enamide",CD1,2.48,"(15Z)-N-[(2S,3S,4R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]TETRACOS-15-ENAMIDE|CD1|A|B",stcrdab_structures/4ww2.pdb
+4x6c,"A->C,G->D,H->E","(4R,7R,18Z)-4,7-dihydroxy-N,N,N-trimethyl-10-oxo-3,5,9-trioxa-4-phosphaheptacos-18-en-1-aminium 4-oxide",CD1,2.8,"(4R,7R,18Z)-4,7-DIHYDROXY-N,N,N-TRIMETHYL-10-OXO-3,5,9-TRIOXA-4-PHOSPHAHEPTACOS-18-EN-1-AMINIUM 4-OXIDE|CD1|G|H",stcrdab_structures/4x6c.pdb
+4x6c,"C->C,D->B,E->D,F->E","(4R,7R,18Z)-4,7-dihydroxy-N,N,N-trimethyl-10-oxo-3,5,9-trioxa-4-phosphaheptacos-18-en-1-aminium 4-oxide",CD1,2.8,"(4R,7R,18Z)-4,7-DIHYDROXY-N,N,N-TRIMETHYL-10-OXO-3,5,9-TRIOXA-4-PHOSPHAHEPTACOS-18-EN-1-AMINIUM 4-OXIDE|CD1|E|F",stcrdab_structures/4x6c.pdb
+4x6d,"A->A,B->B,G->D,H->E,I->C",N-ACETYL-D-GLUCOSAMINE,CD1,2.98,N-ACETYL-D-GLUCOSAMINE|CD1|G|H,stcrdab_structures/4x6d.pdb
+4x6d,"C->A,E->D,F->E,J->C",N-ACETYL-D-GLUCOSAMINE,CD1,2.98,N-ACETYL-D-GLUCOSAMINE|CD1|E|F,stcrdab_structures/4x6d.pdb
+4y16,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-3,4-dihydroxy-1-{[6-O-(naphthalen-1-ylcarbamoyl)-alpha-D-galactopyranosyl]oxy}octadecan-2-yl]hexacosanamide",CD1,2.6,"N-[(2S,3S,4R)-3,4-DIHYDROXY-1-{[6-O-(NAPHTHALEN-1-YLCARBAMOYL)-ALPHA-D-GALACTOPYRANOSYL]OXY}OCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/4y16.pdb
+4y2d,"A->C,B->B,C->D,D->E","11-(4-fluorophenyl)-N-[(2S,3S,4R)-1-(alpha-D-galactopyranosyloxy)-3,4-dihydroxyoctadecan-2-yl]undecanamide",CD1,3.05,"11-(4-FLUOROPHENYL)-N-[(2S,3S,4R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]UNDECANAMIDE|CD1|C|D",stcrdab_structures/4y2d.pdb
+4y2d,"E->C,F->B,G->D,H->E","11-(4-fluorophenyl)-N-[(2S,3S,4R)-1-(alpha-D-galactopyranosyloxy)-3,4-dihydroxyoctadecan-2-yl]undecanamide",CD1,3.05,"11-(4-FLUOROPHENYL)-N-[(2S,3S,4R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]UNDECANAMIDE|CD1|G|H",stcrdab_structures/4y2d.pdb
+4y4f,"A->C,B->B,C->D,D->E","(1R)-1,5-anhydro-1-[(1E,3S,4S,5R)-4,5-dihydroxy-3-(nonacosanoylamino)nonadec-1-en-1-yl]-D-galactitol",CD1,3.19,"(1R)-1,5-ANHYDRO-1-[(1E,3S,4S,5R)-4,5-DIHYDROXY-3-(NONACOSANOYLAMINO)NONADEC-1-EN-1-YL]-D-GALACTITOL|CD1|C|D",stcrdab_structures/4y4f.pdb
+4y4f,"E->C,F->B,G->D,H->E","(1R)-1,5-anhydro-1-[(1E,3S,4S,5R)-4,5-dihydroxy-3-(nonacosanoylamino)nonadec-1-en-1-yl]-D-galactitol",CD1,3.19,"(1R)-1,5-ANHYDRO-1-[(1E,3S,4S,5R)-4,5-DIHYDROXY-3-(NONACOSANOYLAMINO)NONADEC-1-EN-1-YL]-D-GALACTITOL|CD1|G|H",stcrdab_structures/4y4f.pdb
+4y4h,"E->C,F->B,G->D,H->E","(1R)-1,5-anhydro-1-{(1E,3S,4S,5R)-4,5-dihydroxy-3-[(8-phenyloctanoyl)amino]nonadec-1-en-1-yl}-D-galactitol",CD1,3.1,"(1R)-1,5-ANHYDRO-1-{(1E,3S,4S,5R)-4,5-DIHYDROXY-3-[(8-PHENYLOCTANOYL)AMINO]NONADEC-1-EN-1-YL}-D-GALACTITOL|CD1|G|H",stcrdab_structures/4y4h.pdb
+4y4h,"A->C,B->B,C->D,D->E","(1R)-1,5-anhydro-1-{(1E,3S,4S,5R)-4,5-dihydroxy-3-[(8-phenyloctanoyl)amino]nonadec-1-en-1-yl}-D-galactitol",CD1,3.1,"(1R)-1,5-ANHYDRO-1-{(1E,3S,4S,5R)-4,5-DIHYDROXY-3-[(8-PHENYLOCTANOYL)AMINO]NONADEC-1-EN-1-YL}-D-GALACTITOL|CD1|C|D",stcrdab_structures/4y4h.pdb
+4y4k,"A->C,B->B,C->D,D->E","(4Z)-9-[(1R,2R)-2-decylcyclopropyl]-N-[(2S,3S,4S)-1-(alpha-D-galactopyranosyloxy)-3,4-dihydroxyoctadecan-2-yl]non-4-enamide",CD1,2.9,"(4Z)-9-[(1R,2R)-2-DECYLCYCLOPROPYL]-N-[(2S,3S,4S)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]NON-4-ENAMIDE|CD1|C|D",stcrdab_structures/4y4k.pdb
+4zak,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-1-(alpha-D-galactopyranosyloxy)-3,4-dihydroxyoctadecan-2-yl]hexacosanethioamide",CD1,2.824,"N-[(2S,3S,4R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3,4-DIHYDROXYOCTADECAN-2-YL]HEXACOSANETHIOAMIDE|CD1|C|D",stcrdab_structures/4zak.pdb
+5d5m,"C->C,D->B,E->D,F->E","1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL",MR1,2.2,"1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|E|F",stcrdab_structures/5d5m.pdb
+5d7j,"A->D,B->E,E->C,F->B","1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL",MR1,1.97,"1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|A|B",stcrdab_structures/5d7j.pdb
+5ivx,"A->A,B->B,E->D,F->E,P->C",p18-i10,MH1,2.1,P18-I10|MH1|E|F,stcrdab_structures/5ivx.pdb
+5l2k,"A->A,B->B,D->D,E->E","6-O-[(2R,3R)-3-hydroxy-2-tetradecyldocosanoyl]-alpha-L-idopyranose",CD1,3.2,"6-O-[(2R,3R)-3-HYDROXY-2-TETRADECYLDOCOSANOYL]-ALPHA-L-IDOPYRANOSE|CD1|D|E",stcrdab_structures/5l2k.pdb
+5m00,"A->A,B->B,G->D,H->E,P->C",lcmv-derived gp33 altered peptide ligand y4a,MH1,1.95,LCMV-DERIVED GP33 ALTERED PEPTIDE LIGAND Y4A|MH1|G|H,stcrdab_structures/5m00.pdb
+5m01,"A->A,B->B,G->D,H->E,P->C",lcmv-derived gp33 altered peptide ligand pa,MH1,1.95,LCMV-DERIVED GP33 ALTERED PEPTIDE LIGAND PA|MH1|G|H,stcrdab_structures/5m01.pdb
+5m02,"A->A,B->B,G->D,H->E,P->C",lcmv-derived gp33 altered peptide ligand pf,MH1,1.75,LCMV-DERIVED GP33 ALTERED PEPTIDE LIGAND PF|MH1|G|H,stcrdab_structures/5m02.pdb
+5swz,"K->A,L->B,M->C,N->D,O->E",influenza np366 epitope,MH1,2.65,INFLUENZA NP366 EPITOPE|MH1|N|O,stcrdab_structures/5swz.pdb
+5swz,"F->A,G->B,H->C,I->D,J->E",influenza np366 epitope,MH1,2.65,INFLUENZA NP366 EPITOPE|MH1|I|J,stcrdab_structures/5swz.pdb
+5swz,"A->A,B->B,C->C,D->D,E->E",influenza np366 epitope,MH1,2.65,INFLUENZA NP366 EPITOPE|MH1|D|E,stcrdab_structures/5swz.pdb
+5swz,"P->A,Q->B,R->C,S->D,T->E",influenza np366 epitope,MH1,2.65,INFLUENZA NP366 EPITOPE|MH1|S|T,stcrdab_structures/5swz.pdb
+5til,"A->A,B->B,C->C,G->D,H->E",pre-glycoprotein polyprotein gp complex,MH1,2.83,PRE-GLYCOPROTEIN POLYPROTEIN GP COMPLEX|MH1|G|H,stcrdab_structures/5til.pdb
+5til,"D->A,E->B,F->C,K->D,L->E",pre-glycoprotein polyprotein gp complex,MH1,2.83,PRE-GLYCOPROTEIN POLYPROTEIN GP COMPLEX|MH1|K|L,stcrdab_structures/5til.pdb
+5tje,"C->A,D->B,E->D,F->E,J->C",peptide gp33-41 from lcmv,MH1,3.2,PEPTIDE GP33-41 FROM LCMV|MH1|E|F,stcrdab_structures/5tje.pdb
+5tje,"A->A,B->B,G->D,H->E,I->C",peptide gp33-41 from lcmv,MH1,3.2,PEPTIDE GP33-41 FROM LCMV|MH1|G|H,stcrdab_structures/5tje.pdb
+5u16,"A->C,B->B,G->D,H->E",2-HYDROXYNAPHTHALENE-1-CARBALDEHYDE,MR1,2,2-HYDROXYNAPHTHALENE-1-CARBALDEHYDE|MR1|G|H,stcrdab_structures/5u16.pdb
+5u16,"C->C,D->B,E->D,F->E",2-HYDROXYNAPHTHALENE-1-CARBALDEHYDE,MR1,2,2-HYDROXYNAPHTHALENE-1-CARBALDEHYDE|MR1|E|F,stcrdab_structures/5u16.pdb
+5u17,"A->C,B->D,G->E,H->B","2,4-DIAMINOPTERIDINE-6-CARBALDEHYDE",MR1,2.15,"2,4-DIAMINOPTERIDINE-6-CARBALDEHYDE|MR1|B|G",stcrdab_structures/5u17.pdb
+5u17,"C->C,D->D,E->E,F->B","2,4-DIAMINOPTERIDINE-6-CARBALDEHYDE",MR1,2.15,"2,4-DIAMINOPTERIDINE-6-CARBALDEHYDE|MR1|D|E",stcrdab_structures/5u17.pdb
+5u1r,"A->C,B->D,G->E,H->B","2-[2,6-DICHLOROPHENYL)AMINO]BENZENEACETIC ACID",MR1,2.7,"2-[2,6-DICHLOROPHENYL)AMINO]BENZENEACETIC ACID|MR1|B|G",stcrdab_structures/5u1r.pdb
+5u1r,"C->C,D->D,E->E,F->B","2-[2,6-DICHLOROPHENYL)AMINO]BENZENEACETIC ACID",MR1,2.7,"2-[2,6-DICHLOROPHENYL)AMINO]BENZENEACETIC ACID|MR1|D|E",stcrdab_structures/5u1r.pdb
+5u2v,"C->C,D->B,E->D,F->E",2-HYDROXY-5-METHOXYBENZALDEHYDE,MR1,2.2,2-HYDROXY-5-METHOXYBENZALDEHYDE|MR1|E|F,stcrdab_structures/5u2v.pdb
+5u2v,"A->C,B->B,G->D,H->E",2-HYDROXY-5-METHOXYBENZALDEHYDE,MR1,2.2,2-HYDROXY-5-METHOXYBENZALDEHYDE|MR1|G|H,stcrdab_structures/5u2v.pdb
+5u72,"C->C,D->D,E->E,F->B",5-HYDROXYDICLOFENAC,MR1,2.5,5-HYDROXYDICLOFENAC|MR1|D|E,stcrdab_structures/5u72.pdb
+5vcj,"A->C,B->B,C->D,D->E","(2S,3S,4R)-2-amino-3,4-dihydroxyoctadecyl alpha-D-galactopyranoside",CD1,3.16,"(2S,3S,4R)-2-AMINO-3,4-DIHYDROXYOCTADECYL ALPHA-D-GALACTOPYRANOSIDE|CD1|C|D",stcrdab_structures/5vcj.pdb
+5wki,"A->A,B->B,D->D,E->E","(19S,22R,25R)-22,25,26-trihydroxy-16,22-dioxo-17,21,23-trioxa-22lambda~5~-phosphahexacosan-19-yl (9E)-octadec-9-enoate",CD1,2.75,"(19S,22R,25R)-22,25,26-TRIHYDROXY-16,22-DIOXO-17,21,23-TRIOXA-22LAMBDA~5~-PHOSPHAHEXACOSAN-19-YL (9E)-OCTADEC-9-ENOATE|CD1|D|E",stcrdab_structures/5wki.pdb
+5wlg,"F->A,G->B,H->C,I->D,J->E",gap50 peptide,MH1,2.1,GAP50 PEPTIDE|MH1|I|J,stcrdab_structures/5wlg.pdb
+5wlg,"A->A,B->B,C->C,D->D,E->E",gap50 peptide,MH1,2.1,GAP50 PEPTIDE|MH1|D|E,stcrdab_structures/5wlg.pdb
+5yxn,"A->D,B->E,C->A,D->B,I->C",ns3 peptide,MH1,2.03,NS3 PEPTIDE|MH1|A|B,stcrdab_structures/5yxn.pdb
+6bga,"A->A,B->B,C->D,D->E,E->C",velcro peptide,MH2,2.307,VELCRO PEPTIDE|MH2|C|D,stcrdab_structures/6bga.pdb
+6bnl,"A->C,B->B,C->D,D->E","N-[(2S,3R)-3-hydroxy-1-{[6-O-(3-phenylpropanoyl)-alpha-D-galactopyranosyl]oxy}octadecan-2-yl]hexacosanamide",CD1,2.6,"N-[(2S,3R)-3-HYDROXY-1-{[6-O-(3-PHENYLPROPANOYL)-ALPHA-D-GALACTOPYRANOSYL]OXY}OCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6bnl.pdb
+6bnl,"E->C,F->B,G->D,H->E","N-[(2S,3R)-3-hydroxy-1-{[6-O-(3-phenylpropanoyl)-alpha-D-galactopyranosyl]oxy}octadecan-2-yl]hexacosanamide",CD1,2.6,"N-[(2S,3R)-3-HYDROXY-1-{[6-O-(3-PHENYLPROPANOYL)-ALPHA-D-GALACTOPYRANOSYL]OXY}OCTADECAN-2-YL]HEXACOSANAMIDE|CD1|G|H",stcrdab_structures/6bnl.pdb
+6c09,"A->C,B->B,C->D,D->E",DECANE,CD1,2.95,DECANE|CD1|C|D,stcrdab_structures/6c09.pdb
+6cql,"A->A,B->B,C->C,D->D,E->E",peptide from capsid protein p24,MH2,2.4,PEPTIDE FROM CAPSID PROTEIN P24|MH2|D|E,stcrdab_structures/6cql.pdb
+6cug,"A->C,D->D,E->E",TETRACOSYL OCTADECANOATE | (2S)-3-(HEXADECANOYLOXY)-2-[(9Z)-OCTADEC-9-ENOYLOXY]PROPYL 2-(TRIMETHYLAMMONIO)ETHYL PHOSPHATE,CD1,2.4,TETRACOSYL OCTADECANOATE | (2S)-3-(HEXADECANOYLOXY)-2-[(9Z)-OCTADEC-9-ENOYLOXY]PROPYL 2-(TRIMETHYLAMMONIO)ETHYL PHOSPHATE|CD1|D|E,stcrdab_structures/6cug.pdb
+6cw6,"A->C,B->B,C->D,D->E","(2S,3S,4R)-N-OCTANOYL-1-[(ALPHA-D-GALACTOPYRANOSYL)OXY]-2-AMINO-OCTADECANE-3,4-DIOL",CD1,2.85,"(2S,3S,4R)-N-OCTANOYL-1-[(ALPHA-D-GALACTOPYRANOSYL)OXY]-2-AMINO-OCTADECANE-3,4-DIOL|CD1|C|D",stcrdab_structures/6cw6.pdb
+6cw9,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-1-(alpha-D-galactopyranosyloxy)-3,4-dihydroxy-16-phenylhexadecan-2-yl]octanamide",CD1,2,"N-[(2S,3S,4R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3,4-DIHYDROXY-16-PHENYLHEXADECAN-2-YL]OCTANAMIDE|CD1|C|D",stcrdab_structures/6cw9.pdb
+6cwb,"A->C,B->B,C->D,D->E","(5R,6S,7S)-5,6-dihydroxy-7-(octanoylamino)-N-[(1E)-4-phenylbutylidene]-8-{[(2S,3R,4S,5R,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)tetrahydro-2H-pyran-2-yl]oxy}octanamide (non-preferred name)",CD1,2.85,"(5R,6S,7S)-5,6-DIHYDROXY-7-(OCTANOYLAMINO)-N-[(1E)-4-PHENYLBUTYLIDENE]-8-{[(2S,3R,4S,5R,6R)-3,4,5-TRIHYDROXY-6-(HYDROXYMETHYL)TETRAHYDRO-2H-PYRAN-2-YL]OXY}OCTANAMIDE (NON-PREFERRED NAME)|CD1|C|D",stcrdab_structures/6cwb.pdb
+6cwe,"A->C,B->B,C->D,D->E","(5R,6S,7S)-5,6-dihydroxy-7-(octanoylamino)-N-(6-phenylhexyl)-8-{[(2S,3R,4S,5R,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)tetrahydro-2H-pyran-2-yl]oxy}octanamide",CD1,2.2,"(5R,6S,7S)-5,6-DIHYDROXY-7-(OCTANOYLAMINO)-N-(6-PHENYLHEXYL)-8-{[(2S,3R,4S,5R,6R)-3,4,5-TRIHYDROXY-6-(HYDROXYMETHYL)TETRAHYDRO-2H-PYRAN-2-YL]OXY}OCTANAMIDE|CD1|C|D",stcrdab_structures/6cwe.pdb
+6cx5,"A->C,B->B,C->D,D->E","(5R,6S,7S)-5,6-dihydroxy-7-(octanoylamino)-N-(8-phenyloctyl)-8-{[(2S,3R,4S,5R,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)tetrahydro-2H-pyran-2-yl]oxy}octanamide (non-preferred name)",CD1,2.4,"(5R,6S,7S)-5,6-DIHYDROXY-7-(OCTANOYLAMINO)-N-(8-PHENYLOCTYL)-8-{[(2S,3R,4S,5R,6R)-3,4,5-TRIHYDROXY-6-(HYDROXYMETHYL)TETRAHYDRO-2H-PYRAN-2-YL]OXY}OCTANAMIDE (NON-PREFERRED NAME)|CD1|C|D",stcrdab_structures/6cx5.pdb
+6cxa,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-3,4-dihydroxy-8-oxo-8-[(6-phenylhexyl)amino]-1-{[(2S,3R,4S,5R,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)tetrahydro-2H-pyran-2-yl]oxy}octan-2-yl]icosanamide",CD1,2.65,"N-[(2S,3S,4R)-3,4-DIHYDROXY-8-OXO-8-[(6-PHENYLHEXYL)AMINO]-1-{[(2S,3R,4S,5R,6R)-3,4,5-TRIHYDROXY-6-(HYDROXYMETHYL)TETRAHYDRO-2H-PYRAN-2-YL]OXY}OCTAN-2-YL]ICOSANAMIDE|CD1|C|D",stcrdab_structures/6cxa.pdb
+6cxe,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-3,4-dihydroxy-8-oxo-8-[(6-phenylhexyl)amino]-1-{[(2S,3R,4S,5R,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)tetrahydro-2H-pyran-2-yl]oxy}octan-2-yl]hexacosanamide",CD1,2.05,"N-[(2S,3S,4R)-3,4-DIHYDROXY-8-OXO-8-[(6-PHENYLHEXYL)AMINO]-1-{[(2S,3R,4S,5R,6R)-3,4,5-TRIHYDROXY-6-(HYDROXYMETHYL)TETRAHYDRO-2H-PYRAN-2-YL]OXY}OCTAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6cxe.pdb
+6g9q,"A->A,B->B,G->D,H->E,P->C",dopamine beta-hydroxylase,MH1,1.89,DOPAMINE BETA-HYDROXYLASE|MH1|G|H,stcrdab_structures/6g9q.pdb
+6miv,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-1-({4-O-[(4-tert-butylphenyl)methyl]-alpha-D-galactopyranosyl}oxy)-3,4-dihydroxyoctadecan-2-yl]hexacosanamide",CD1,2.05,"N-[(2S,3S,4R)-1-({4-O-[(4-TERT-BUTYLPHENYL)METHYL]-ALPHA-D-GALACTOPYRANOSYL}OXY)-3,4-DIHYDROXYOCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6miv.pdb
+6miy,"E->C,F->B,G->D,H->E","N-{(2S,3S,4R)-1-[(4-O-benzyl-alpha-D-galactopyranosyl)oxy]-3,4-dihydroxyoctadecan-2-yl}hexacosanamide",CD1,2.75,"N-{(2S,3S,4R)-1-[(4-O-BENZYL-ALPHA-D-GALACTOPYRANOSYL)OXY]-3,4-DIHYDROXYOCTADECAN-2-YL}HEXACOSANAMIDE|CD1|G|H",stcrdab_structures/6miy.pdb
+6miy,"A->C,B->B,C->D,D->E","N-{(2S,3S,4R)-1-[(4-O-benzyl-alpha-D-galactopyranosyl)oxy]-3,4-dihydroxyoctadecan-2-yl}hexacosanamide",CD1,2.75,"N-{(2S,3S,4R)-1-[(4-O-BENZYL-ALPHA-D-GALACTOPYRANOSYL)OXY]-3,4-DIHYDROXYOCTADECAN-2-YL}HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6miy.pdb
+6mj4,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-3,4-dihydroxy-1-{[4-O-(prop-2-en-1-yl)-alpha-D-galactopyranosyl]oxy}octadecan-2-yl]hexacosanamide",CD1,2,"N-[(2S,3S,4R)-3,4-DIHYDROXY-1-{[4-O-(PROP-2-EN-1-YL)-ALPHA-D-GALACTOPYRANOSYL]OXY}OCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6mj4.pdb
+6mj6,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-1-({4-O-[(4-chlorophenyl)methyl]-alpha-D-galactopyranosyl}oxy)-3,4-dihydroxyoctadecan-2-yl]hexacosanamide",CD1,2.45,"N-[(2S,3S,4R)-1-({4-O-[(4-CHLOROPHENYL)METHYL]-ALPHA-D-GALACTOPYRANOSYL}OXY)-3,4-DIHYDROXYOCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6mj6.pdb
+6mja,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-3,4-dihydroxy-1-({4-O-[(4-methylphenyl)methyl]-alpha-D-galactopyranosyl}oxy)octadecan-2-yl]hexacosanamide",CD1,2.35,"N-[(2S,3S,4R)-3,4-DIHYDROXY-1-({4-O-[(4-METHYLPHENYL)METHYL]-ALPHA-D-GALACTOPYRANOSYL}OXY)OCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6mja.pdb
+6mji,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-1-{[4-O-(cyclopropylmethyl)-alpha-D-galactopyranosyl]oxy}-3,4-dihydroxyoctadecan-2-yl]hexacosanamide",CD1,2.3,"N-[(2S,3S,4R)-1-{[4-O-(CYCLOPROPYLMETHYL)-ALPHA-D-GALACTOPYRANOSYL]OXY}-3,4-DIHYDROXYOCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6mji.pdb
+6mjj,"A->C,B->B,C->D,D->E","N-[(2S,3S,4R)-1-({4-O-[(3,4-dichlorophenyl)methyl]-alpha-D-galactopyranosyl}oxy)-3,4-dihydroxyoctadecan-2-yl]hexacosanamide",CD1,1.93,"N-[(2S,3S,4R)-1-({4-O-[(3,4-DICHLOROPHENYL)METHYL]-ALPHA-D-GALACTOPYRANOSYL}OXY)-3,4-DIHYDROXYOCTADECAN-2-YL]HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6mjj.pdb
+6mjq,"E->C,F->B,G->D,H->E","N-{(2S,3S,4R)-3,4-dihydroxy-1-[(4-O-{[4-(trifluoromethyl)phenyl]methyl}-alpha-D-galactopyranosyl)oxy]octadecan-2-yl}hexacosanamide",CD1,3,"N-{(2S,3S,4R)-3,4-DIHYDROXY-1-[(4-O-{[4-(TRIFLUOROMETHYL)PHENYL]METHYL}-ALPHA-D-GALACTOPYRANOSYL)OXY]OCTADECAN-2-YL}HEXACOSANAMIDE|CD1|G|H",stcrdab_structures/6mjq.pdb
+6mjq,"A->C,B->B,C->D,D->E","N-{(2S,3S,4R)-3,4-dihydroxy-1-[(4-O-{[4-(trifluoromethyl)phenyl]methyl}-alpha-D-galactopyranosyl)oxy]octadecan-2-yl}hexacosanamide",CD1,3,"N-{(2S,3S,4R)-3,4-DIHYDROXY-1-[(4-O-{[4-(TRIFLUOROMETHYL)PHENYL]METHYL}-ALPHA-D-GALACTOPYRANOSYL)OXY]OCTADECAN-2-YL}HEXACOSANAMIDE|CD1|C|D",stcrdab_structures/6mjq.pdb
+6mss,"A->D,B->E,C->C,D->B",(2S)-2-(heptadecanoyloxy)-3-{[(10S)-10-methyloctadecanoyl]oxy}propyl alpha-D-glucopyranosiduronic acid,CD1,3,(2S)-2-(HEPTADECANOYLOXY)-3-{[(10S)-10-METHYLOCTADECANOYL]OXY}PROPYL ALPHA-D-GLUCOPYRANOSIDURONIC ACID|CD1|A|B,stcrdab_structures/6mss.pdb
+6omg,"A->C,B->B,C->D,D->E",(2R)-1-(alpha-D-glucopyranosyloxy)-3-(octadecanoyloxy)propan-2-yl (9Z)-octadec-9-enoate,CD1,2.1,(2R)-1-(ALPHA-D-GLUCOPYRANOSYLOXY)-3-(OCTADECANOYLOXY)PROPAN-2-YL (9Z)-OCTADEC-9-ENOATE|CD1|C|D,stcrdab_structures/6omg.pdb
+6puc,"A->C,B->B,G->D,H->E","1-deoxy-1-({2,6-dioxo-5-[(E)-(2-oxopropylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-ribitol",MR1,1.85,"1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|G|H",stcrdab_structures/6puc.pdb
+6puc,"C->C,D->D,E->E,F->B","1-deoxy-1-({2,6-dioxo-5-[(E)-(2-oxopropylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-ribitol",MR1,1.85,"1-DEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-RIBITOL|MR1|D|E",stcrdab_structures/6puc.pdb
+6pud,"C->C,D->D,E->E,F->B","6-[(5-hydroxypentyl)amino]-5-[(E)-propylideneamino]pyrimidine-2,4(1H,3H)-dione",MR1,1.8,"6-[(5-HYDROXYPENTYL)AMINO]-5-[(E)-PROPYLIDENEAMINO]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|D|E",stcrdab_structures/6pud.pdb
+6pud,"A->C,B->B,G->D,H->E","6-[(5-hydroxypentyl)amino]-5-[(E)-propylideneamino]pyrimidine-2,4(1H,3H)-dione",MR1,1.8,"6-[(5-HYDROXYPENTYL)AMINO]-5-[(E)-PROPYLIDENEAMINO]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|G|H",stcrdab_structures/6pud.pdb
+6pue,"A->C,B->B,G->D,H->E","1,4-dideoxy-1-({2,6-dioxo-5-[(E)-(2-oxopropylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-erythro-pentitol",MR1,1.9,"1,4-DIDEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-ERYTHRO-PENTITOL|MR1|G|H",stcrdab_structures/6pue.pdb
+6pue,"C->C,D->D,E->E,F->B","1,4-dideoxy-1-({2,6-dioxo-5-[(E)-(2-oxopropylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-erythro-pentitol",MR1,1.9,"1,4-DIDEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-ERYTHRO-PENTITOL|MR1|D|E",stcrdab_structures/6pue.pdb
+6pug,"C->C,D->D,E->E,F->B","6-[(2-hydroxyethyl)amino]-5-[(E)-(2-oxopropylidene)amino]pyrimidine-2,4(1H,3H)-dione",MR1,1.8,"6-[(2-HYDROXYETHYL)AMINO]-5-[(E)-(2-OXOPROPYLIDENE)AMINO]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|D|E",stcrdab_structures/6pug.pdb
+6pug,"A->C,B->B,G->D,H->E","6-[(2-hydroxyethyl)amino]-5-[(E)-(2-oxopropylidene)amino]pyrimidine-2,4(1H,3H)-dione",MR1,1.8,"6-[(2-HYDROXYETHYL)AMINO]-5-[(E)-(2-OXOPROPYLIDENE)AMINO]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|G|H",stcrdab_structures/6pug.pdb
+6puh,"C->C,D->D,E->E,F->B","6-methyl-5-[(1E)-3-oxobut-1-en-1-yl]pyrimidine-2,4(1H,3H)-dione",MR1,1.88,"6-METHYL-5-[(1E)-3-OXOBUT-1-EN-1-YL]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|D|E",stcrdab_structures/6puh.pdb
+6pui,"C->C,D->D,E->E,F->B","6-[(4-hydroxybutyl)amino]-5-[(E)-(2-oxopropylidene)amino]pyrimidine-2,4(1H,3H)-dione",MR1,1.96,"6-[(4-HYDROXYBUTYL)AMINO]-5-[(E)-(2-OXOPROPYLIDENE)AMINO]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|D|E",stcrdab_structures/6pui.pdb
+6pui,"A->C,B->D,G->E,H->B","6-[(4-hydroxybutyl)amino]-5-[(E)-(2-oxopropylidene)amino]pyrimidine-2,4(1H,3H)-dione",MR1,1.96,"6-[(4-HYDROXYBUTYL)AMINO]-5-[(E)-(2-OXOPROPYLIDENE)AMINO]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|B|G",stcrdab_structures/6pui.pdb
+6puj,"A->C,B->D,G->E,H->B","6-[(3-hydroxypropyl)amino]-5-[(E)-(2-oxopropylidene)amino]pyrimidine-2,4(1H,3H)-dione",MR1,1.92,"6-[(3-HYDROXYPROPYL)AMINO]-5-[(E)-(2-OXOPROPYLIDENE)AMINO]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|B|G",stcrdab_structures/6puj.pdb
+6puj,"C->C,D->D,E->E,F->B","6-[(3-hydroxypropyl)amino]-5-[(E)-(2-oxopropylidene)amino]pyrimidine-2,4(1H,3H)-dione",MR1,1.92,"6-[(3-HYDROXYPROPYL)AMINO]-5-[(E)-(2-OXOPROPYLIDENE)AMINO]PYRIMIDINE-2,4(1H,3H)-DIONE|MR1|D|E",stcrdab_structures/6puj.pdb
+6puk,"C->C,D->D,E->E,F->B","1,2-dideoxy-1-{2,6-dioxo-5-[(1E)-3-oxobut-1-en-1-yl]-1,2,3,6-tetrahydropyrimidin-4-yl}-D-ribo-hexitol",MR1,2.08,"1,2-DIDEOXY-1-{2,6-DIOXO-5-[(1E)-3-OXOBUT-1-EN-1-YL]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}-D-RIBO-HEXITOL|MR1|D|E",stcrdab_structures/6puk.pdb
+6puk,"A->C,B->D,G->E,H->B","1,2-dideoxy-1-{2,6-dioxo-5-[(1E)-3-oxobut-1-en-1-yl]-1,2,3,6-tetrahydropyrimidin-4-yl}-D-ribo-hexitol",MR1,2.08,"1,2-DIDEOXY-1-{2,6-DIOXO-5-[(1E)-3-OXOBUT-1-EN-1-YL]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}-D-RIBO-HEXITOL|MR1|B|G",stcrdab_structures/6puk.pdb
+6pul,"C->C,D->D,E->E,F->B","1,3-dideoxy-1-({2,6-dioxo-5-[(E)-(2-oxopropylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-erythro-pentitol",MR1,1.84,"1,3-DIDEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-ERYTHRO-PENTITOL|MR1|D|E",stcrdab_structures/6pul.pdb
+6pul,"A->C,B->D,G->E,H->B","1,3-dideoxy-1-({2,6-dioxo-5-[(E)-(2-oxopropylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-erythro-pentitol",MR1,1.84,"1,3-DIDEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-ERYTHRO-PENTITOL|MR1|B|G",stcrdab_structures/6pul.pdb
+6pum,"A->C,B->B,G->D,H->E","1,2-dideoxy-1-({2,6-dioxo-5-[(E)-(2-oxopropylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-erythro-pentitol",MR1,1.96,"1,2-DIDEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-ERYTHRO-PENTITOL|MR1|G|H",stcrdab_structures/6pum.pdb
+6pum,"C->C,D->D,E->E,F->B","1,2-dideoxy-1-({2,6-dioxo-5-[(E)-(2-oxopropylidene)amino]-1,2,3,6-tetrahydropyrimidin-4-yl}amino)-D-erythro-pentitol",MR1,1.96,"1,2-DIDEOXY-1-({2,6-DIOXO-5-[(E)-(2-OXOPROPYLIDENE)AMINO]-1,2,3,6-TETRAHYDROPYRIMIDIN-4-YL}AMINO)-D-ERYTHRO-PENTITOL|MR1|D|E",stcrdab_structures/6pum.pdb
+6pvc,"C->C,D->B,E->D,F->E","N-(2,6-dioxo-1,2,3,6-tetrahydropyrimidine-4-carbonyl)-beta-alanine",MR1,1.96,"N-(2,6-DIOXO-1,2,3,6-TETRAHYDROPYRIMIDINE-4-CARBONYL)-BETA-ALANINE|MR1|E|F",stcrdab_structures/6pvc.pdb
+6pvc,"A->C,B->B,G->D,H->E","N-(2,6-dioxo-1,2,3,6-tetrahydropyrimidine-4-carbonyl)-beta-alanine",MR1,1.96,"N-(2,6-DIOXO-1,2,3,6-TETRAHYDROPYRIMIDINE-4-CARBONYL)-BETA-ALANINE|MR1|G|H",stcrdab_structures/6pvc.pdb
+6pvd,"C->C,D->D,E->E,F->B","methyl N-(2,6-dioxo-1,2,3,6-tetrahydropyrimidine-4-carbonyl)-beta-alaninate",MR1,2.14,"METHYL N-(2,6-DIOXO-1,2,3,6-TETRAHYDROPYRIMIDINE-4-CARBONYL)-BETA-ALANINATE|MR1|D|E",stcrdab_structures/6pvd.pdb
+6pvd,"A->C,B->B,G->D,H->E","methyl N-(2,6-dioxo-1,2,3,6-tetrahydropyrimidine-4-carbonyl)-beta-alaninate",MR1,2.14,"METHYL N-(2,6-DIOXO-1,2,3,6-TETRAHYDROPYRIMIDINE-4-CARBONYL)-BETA-ALANINATE|MR1|G|H",stcrdab_structures/6pvd.pdb
+6r0e,"A->A,B->B,C->C,D->D,E->E",unknown,MH2,1.91,UNKNOWN|MH2|D|E,stcrdab_structures/6r0e.pdb
+6rsy,"A->A,B->B,C->C,D->D,E->E",arg-met-phe-pro-asn-ala-pro-tyr-leu,MH1,2.95,ARG-MET-PHE-PRO-ASN-ALA-PRO-TYR-LEU|MH1|D|E,stcrdab_structures/6rsy.pdb
+6rsy,"F->A,G->B,H->C,I->D,J->E",arg-met-phe-pro-asn-ala-pro-tyr-leu,MH1,2.95,ARG-MET-PHE-PRO-ASN-ALA-PRO-TYR-LEU|MH1|I|J,stcrdab_structures/6rsy.pdb
+6tmo,"A->A,B->B,C->C,D->D,E->E",eaagigiltv,MH1,2.1,EAAGIGILTV|MH1|D|E,stcrdab_structures/6tmo.pdb
+6u3o,"E->A,F->B,G->D,H->E,I->C",peptide,MH2,2.743,PEPTIDE|MH2|G|H,stcrdab_structures/6u3o.pdb
+6u3o,"A->D,B->E,C->A,D->B,J->C",peptide,MH2,2.743,PEPTIDE|MH2|A|B,stcrdab_structures/6u3o.pdb
+6uz1,"A->A,B->B,C->C,D->D,E->E",leu-leu-phe-gly-tyr-pro-val-tyr-val,MH1,3.14,LEU-LEU-PHE-GLY-TYR-PRO-VAL-TYR-VAL|MH1|D|E,stcrdab_structures/6uz1.pdb
+6uz1,"F->A,G->B,H->C,I->D,J->E",leu-leu-phe-gly-tyr-pro-val-tyr-val,MH1,3.14,LEU-LEU-PHE-GLY-TYR-PRO-VAL-TYR-VAL|MH1|I|J,stcrdab_structures/6uz1.pdb
+6v0y,"B->A,C->C,D->D,E->E","fibrinogen beta 72,74cit69-81",GB,2.7,"FIBRINOGEN BETA 72,74CIT69-81|GB|D|E",stcrdab_structures/6v0y.pdb
+6v18,"A->A,B->B,C->C,D->D,E->E",fibrinogen beta,MH2,2.35,FIBRINOGEN BETA|MH2|D|E,stcrdab_structures/6v18.pdb
+6v19,"A->A,B->B,C->C,D->D,E->E","fibrinogen beta 72,74cit69-81",MH2,2.6,"FIBRINOGEN BETA 72,74CIT69-81|MH2|D|E",stcrdab_structures/6v19.pdb
+6v1a,"A->A,B->B,C->C,D->D,E->E",fibrinogen beta 74cit69-81,MH2,2.29,FIBRINOGEN BETA 74CIT69-81|MH2|D|E,stcrdab_structures/6v1a.pdb
+6w9u,"C->C,D->D,E->E,F->B","1-[[6-(1-$l^{1}-oxidanylethyl)-4-$l^{3}-oxidanylidene-2,3,6,8~{a}-tetrahydropteridin-2-yl]-$l^{2}-azanyl]ethanone",MR1,1.89,"1-[[6-(1-$L^{1}-OXIDANYLETHYL)-4-$L^{3}-OXIDANYLIDENE-2,3,6,8~{A}-TETRAHYDROPTERIDIN-2-YL]-$L^{2}-AZANYL]ETHANONE|MR1|D|E",stcrdab_structures/6w9u.pdb
+6w9u,"A->C,B->B,G->D,H->E","1-[[6-(1-$l^{1}-oxidanylethyl)-4-$l^{3}-oxidanylidene-2,3,6,8~{a}-tetrahydropteridin-2-yl]-$l^{2}-azanyl]ethanone",MR1,1.89,"1-[[6-(1-$L^{1}-OXIDANYLETHYL)-4-$L^{3}-OXIDANYLIDENE-2,3,6,8~{A}-TETRAHYDROPTERIDIN-2-YL]-$L^{2}-AZANYL]ETHANONE|MR1|G|H",stcrdab_structures/6w9u.pdb
+6xng,"A->C,B->B,C->D,D->E","(3R)-N-[(2S,3R)-1-(alpha-D-galactopyranosyloxy)-3-hydroxyheptadecan-2-yl]-3-hydroxyheptadecanamide",CD1,2.79,"(3R)-N-[(2S,3R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3-HYDROXYHEPTADECAN-2-YL]-3-HYDROXYHEPTADECANAMIDE|CD1|C|D",stcrdab_structures/6xng.pdb
+6zky,"A->A,B->B,C->C,D->D,E->E",enoyl-[acyl-carrier-protein] reductase [nadh],MH1,2.65,ENOYL-[ACYL-CARRIER-PROTEIN] REDUCTASE [NADH]|MH1|D|E,stcrdab_structures/6zky.pdb
+7byd,"F->A,G->B,H->C,I->D,J->E",gly-gly-ala-ile,MH1,2.80003,GLY-GLY-ALA-ILE|MH1|I|J,stcrdab_structures/7byd.pdb
+7byd,"A->A,B->B,C->C,D->D,E->E",gly-gly-ala-ile,MH1,2.80003,GLY-GLY-ALA-ILE|MH1|D|E,stcrdab_structures/7byd.pdb
+7jwi,"A->A,B->B,C->C,D->D,E->E",nucleoprotein,MH1,3.02,NUCLEOPROTEIN|MH1|D|E,stcrdab_structures/7jwi.pdb
+7m72,"A->C,B->B,C->D,D->E","(3R)-N-[(2S,3R)-1-(alpha-D-galactopyranosyloxy)-3-hydroxy-15-methylhexadecan-2-yl]-3-hydroxyheptadecanamide",CD1,2.4,"(3R)-N-[(2S,3R)-1-(ALPHA-D-GALACTOPYRANOSYLOXY)-3-HYDROXY-15-METHYLHEXADECAN-2-YL]-3-HYDROXYHEPTADECANAMIDE|CD1|C|D",stcrdab_structures/7m72.pdb
+7n2o,"A->A,B->B,C->C,D->D,F->E",yeih protein,MH1,2.3,YEIH PROTEIN|MH1|D|F,stcrdab_structures/7n2o.pdb
+7n2p,"A->A,B->B,C->C,D->D,F->E",ribonuclease h2 subunit b,MH1,2.5,RIBONUCLEASE H2 SUBUNIT B|MH1|D|F,stcrdab_structures/7n2p.pdb
+7n2q,"E->D,G->E,H->A,I->B,J->C",yeih protein,MH1,2.7,YEIH PROTEIN|MH1|E|G,stcrdab_structures/7n2q.pdb
+7n2r,"A->A,B->B,C->C,D->D,F->E",pre-mrna processing factor 3,MH1,2.28,PRE-MRNA PROCESSING FACTOR 3|MH1|D|F,stcrdab_structures/7n2r.pdb
+7n4k,"A->A,C->C,D->D,E->E",peptide from polymerase acidic protein,MH1,1.85,PEPTIDE FROM POLYMERASE ACIDIC PROTEIN|MH1|D|E,stcrdab_structures/7n4k.pdb
+7na5,"A->A,B->B,C->C,D->D,E->E",heat shock factor protein 2,MH1,2.5,HEAT SHOCK FACTOR PROTEIN 2|MH1|D|E,stcrdab_structures/7na5.pdb
+7ndt,"F->A,G->B,H->C,I->D,J->E",unknown,MH1,2.999,UNKNOWN|MH1|I|J,stcrdab_structures/7ndt.pdb
+7ndt,"A->A,B->B,C->C,D->D,E->E",unknown,MH1,2.999,UNKNOWN|MH1|D|E,stcrdab_structures/7ndt.pdb
+7nme,"A->A,B->B,C->C,D->D,E->E",gln-leu-pro-arg-leu-phe-pro-leu-leu,MH1,2.2,GLN-LEU-PRO-ARG-LEU-PHE-PRO-LEU-LEU|MH1|D|E,stcrdab_structures/7nme.pdb
+7nmg,"A->A,B->B,C->C,D->D,E->E",diabetes epitope lwmrllpll,MH1,2.48,DIABETES EPITOPE LWMRLLPLL|MH1|D|E,stcrdab_structures/7nmg.pdb
+7ow5,"A->A,B->B,C->C,D->D,E->E",kras peptide (vvvgaggvgk),MH1,2.58,KRAS PEPTIDE (VVVGAGGVGK)|MH1|D|E,stcrdab_structures/7ow5.pdb
+7ow6,"A->A,B->B,C->C,D->D,E->E",kras g12d peptide (vvvgadgvgk),MH1,2.64,KRAS G12D PEPTIDE (VVVGADGVGK)|MH1|D|E,stcrdab_structures/7ow6.pdb
+7pb2,"F->A,G->B,H->C,I->D,J->E",kras g12d peptide (vvvgadgvgk),MH1,3.41,KRAS G12D PEPTIDE (VVVGADGVGK)|MH1|I|J,stcrdab_structures/7pb2.pdb
+7pbe,"F->A,G->B,H->C,I->D,J->E",spike protein s1,MH1,3,SPIKE PROTEIN S1|MH1|I|J,stcrdab_structures/7pbe.pdb
+7pbe,"A->A,B->B,C->C,D->D,E->E",spike protein s1,MH1,3,SPIKE PROTEIN S1|MH1|D|E,stcrdab_structures/7pbe.pdb
+7pdw,"F->D,G->E,H->A,I->B,J->C",unknown,MH1,1.82,UNKNOWN|MH1|F|G,stcrdab_structures/7pdw.pdb
+7pdw,"A->D,B->E,C->A,D->B,E->C",unknown,MH1,1.82,UNKNOWN|MH1|A|B,stcrdab_structures/7pdw.pdb
+7phr,"A->D,B->E,H->A,L->B,P->C",tumor-associated antigentic peptide gp100,MH1,3.08,TUMOR-ASSOCIATED ANTIGENTIC PEPTIDE GP100|MH1|A|B,stcrdab_structures/7phr.pdb
+7q99,"A->A,B->B,C->C,D->D,E->E",asn-leu-ser-ala-leu-gly-ile-phe-ser-thr,MH1,2.55,ASN-LEU-SER-ALA-LEU-GLY-ILE-PHE-SER-THR|MH1|D|E,stcrdab_structures/7q99.pdb
+7q9a,"A->A,B->B,C->C,D->D,E->E",leu-leu-leu-gly-ile-gly-ile-leu-val-leu,MH1,2.1,LEU-LEU-LEU-GLY-ILE-GLY-ILE-LEU-VAL-LEU|MH1|D|E,stcrdab_structures/7q9a.pdb
+7qpj,"A->D,B->E,C->A,D->B,E->C",melanoma-associated antigen 10,MH1,1.54,MELANOMA-ASSOCIATED ANTIGEN 10|MH1|A|B,stcrdab_structures/7qpj.pdb
+7r80,"A->D,B->E,C->A,D->B,E->C",gln-ala-ser-gln-glu-val-lys-asn-trp,MH1,2.9,GLN-ALA-SER-GLN-GLU-VAL-LYS-ASN-TRP|MH1|A|B,stcrdab_structures/7r80.pdb
+7rdv,"A->A,C->D,D->E,H->C",aggrecan core peptide,GA,2.90007,AGGRECAN CORE PEPTIDE|GA|C|D,stcrdab_structures/7rdv.pdb
+7rk7,"A->A,B->B,C->C,D->D,E->E",tyrosinase peptide,MH1,2.54,TYROSINASE PEPTIDE|MH1|D|E,stcrdab_structures/7rk7.pdb
+7sg1,"F->A,G->B,H->C,I->D,J->E",dq2-glia-alpha1a peptide,MH2,3.1,DQ2-GLIA-ALPHA1A PEPTIDE|MH2|I|J,stcrdab_structures/7sg1.pdb
+7sg1,"A->A,B->B,C->C,D->D,E->E",dq2-glia-alpha1a peptide,MH2,3.1,DQ2-GLIA-ALPHA1A PEPTIDE|MH2|D|E,stcrdab_structures/7sg1.pdb
+7t2b,"P->A,Q->B,R->C,S->D,T->E",pneumolysin-derived peptide,MH2,2.8,PNEUMOLYSIN-DERIVED PEPTIDE|MH2|S|T,stcrdab_structures/7t2b.pdb
+7t2b,"K->A,L->B,M->C,N->D,O->E",pneumolysin-derived peptide,MH2,2.8,PNEUMOLYSIN-DERIVED PEPTIDE|MH2|N|O,stcrdab_structures/7t2b.pdb
+7t2b,"F->A,G->B,H->C,I->D,J->E",pneumolysin-derived peptide,MH2,2.8,PNEUMOLYSIN-DERIVED PEPTIDE|MH2|I|J,stcrdab_structures/7t2b.pdb
+7t2b,"A->A,B->B,C->C,D->D,E->E",pneumolysin-derived peptide,MH2,2.8,PNEUMOLYSIN-DERIVED PEPTIDE|MH2|D|E,stcrdab_structures/7t2b.pdb
+7ufj,"A->C,B->B,G->D,H->E",ETHYL VANILLIN,MR1,2.5,ETHYL VANILLIN|MR1|G|H,stcrdab_structures/7ufj.pdb
+7z50,"A->A,B->B,E->E,H->D,T->C",hybrid insulin peptide,MH2,2.65,HYBRID INSULIN PEPTIDE|MH2|H|E,stcrdab_structures/7z50.pdb
+7z50,"C->A,D->B,F->E,G->D,W->C",hybrid insulin peptide,MH2,2.65,HYBRID INSULIN PEPTIDE|MH2|G|F,stcrdab_structures/7z50.pdb
+8cx4,"A->A,B->B,C->C,D->D,F->E",yeih,MH1,2.2,YEIH|MH1|D|F,stcrdab_structures/8cx4.pdb
+8d5q,"A->D,B->E,C->A,E->C","dense granule protein 6, hf10 peptide",MH1,2.501,"DENSE GRANULE PROTEIN 6, HF10 PEPTIDE|MH1|A|B",stcrdab_structures/8d5q.pdb
+8dnt,"A->D,B->E,D->C,E->A,F->B",nucleoprotein,MH1,3.18,NUCLEOPROTEIN|MH1|A|B,stcrdab_structures/8dnt.pdb
+8dnt,"V->D,W->E,X->C,Y->A,Z->B",nucleoprotein,MH1,3.18,NUCLEOPROTEIN|MH1|V|W,stcrdab_structures/8dnt.pdb
+8dnt,"M->D,P->E,Q->C,R->A,T->B",nucleoprotein,MH1,3.18,NUCLEOPROTEIN|MH1|M|P,stcrdab_structures/8dnt.pdb
+8dnt,"H->D,I->E,J->C,K->A,L->B",nucleoprotein,MH1,3.18,NUCLEOPROTEIN|MH1|H|I,stcrdab_structures/8dnt.pdb
+8dv4,"A->C,B->B,D->D,E->E,F->C","TETRACOSYL OCTADECANOATE | 1,2-DIACYL-SN-GLYCERO-3-PHOSPHOINOSITOL | 1,2-DIACYL-SN-GLYCERO-3-PHOSPHOINOSITOL | N-ACETYL-D-GLUCOSAMINE",CD1,2.4,"TETRACOSYL OCTADECANOATE | 1,2-DIACYL-SN-GLYCERO-3-PHOSPHOINOSITOL | 1,2-DIACYL-SN-GLYCERO-3-PHOSPHOINOSITOL | N-ACETYL-D-GLUCOSAMINE|CD1|D|E",stcrdab_structures/8dv4.pdb
+8en8,"A->A,B->B,C->C,D->D,E->E",nucleoprotein np4 epitope,MH1,2.70001,NUCLEOPROTEIN NP4 EPITOPE|MH1|D|E,stcrdab_structures/8en8.pdb
+8en8,"F->A,G->B,H->C,I->D,J->E",nucleoprotein np4 epitope,MH1,2.70001,NUCLEOPROTEIN NP4 EPITOPE|MH1|I|J,stcrdab_structures/8en8.pdb
+8enh,"F->A,G->B,H->C,I->D,J->E",nucleoprotein np7 epitope,MH1,2.50003,NUCLEOPROTEIN NP7 EPITOPE|MH1|I|J,stcrdab_structures/8enh.pdb
+8enh,"A->A,B->B,C->C,D->D,E->E",nucleoprotein np7 epitope,MH1,2.50003,NUCLEOPROTEIN NP7 EPITOPE|MH1|D|E,stcrdab_structures/8enh.pdb
+8enh,"P->A,Q->B,R->C,S->D,T->E",nucleoprotein np7 epitope,MH1,2.50003,NUCLEOPROTEIN NP7 EPITOPE|MH1|S|T,stcrdab_structures/8enh.pdb
+8enh,"K->A,L->B,M->C,N->D,O->E",nucleoprotein np7 epitope,MH1,2.50003,NUCLEOPROTEIN NP7 EPITOPE|MH1|N|O,stcrdab_structures/8enh.pdb
+8eo8,"A->A,B->B,C->C,D->D,E->E",nucleoprotein np8 epitope,MH1,2.3,NUCLEOPROTEIN NP8 EPITOPE|MH1|D|E,stcrdab_structures/8eo8.pdb
+8eo8,"F->A,G->B,H->C,I->D,J->E",nucleoprotein np8 epitope,MH1,2.3,NUCLEOPROTEIN NP8 EPITOPE|MH1|I|J,stcrdab_structures/8eo8.pdb
+8eo8,"K->A,L->B,M->C,N->D,O->E",nucleoprotein np8 epitope,MH1,2.3,NUCLEOPROTEIN NP8 EPITOPE|MH1|N|O,stcrdab_structures/8eo8.pdb
+8eo8,"P->A,Q->B,R->C,S->D,T->E",nucleoprotein np8 epitope,MH1,2.3,NUCLEOPROTEIN NP8 EPITOPE|MH1|S|T,stcrdab_structures/8eo8.pdb
+8es8,"A->D,B->E,M->B,N->A,P->C",melanoma-associated antigen 4,MH1,2.65,MELANOMA-ASSOCIATED ANTIGEN 4|MH1|A|B,stcrdab_structures/8es8.pdb
+8f5a,"A->A,B->B,C->D,D->E,E->C",tw10 peptide,MH1,1.95,TW10 PEPTIDE|MH1|C|D,stcrdab_structures/8f5a.pdb
+8gon,"A->A,B->B,C->C,D->D,E->E",spike protein s2,MH1,2.601,SPIKE PROTEIN S2|MH1|D|E,stcrdab_structures/8gon.pdb
+8gvb,"A->D,B->E,H->A,L->B,P->C",8-mer peptide from protein nef,MH1,3.2,8-MER PEPTIDE FROM PROTEIN NEF|MH1|A|B,stcrdab_structures/8gvb.pdb
+8gvg,"A->D,B->E,H->A,L->B,P->C",mutated 8-mer peptide from protein nef,MH1,3.37,MUTATED 8-MER PEPTIDE FROM PROTEIN NEF|MH1|A|B,stcrdab_structures/8gvg.pdb
+8i5c,"K->A,L->B,M->C,N->D,O->E",tcr alpha chain,MH1,3.34,TCR ALPHA CHAIN|MH1|N|O,stcrdab_structures/8i5c.pdb
+8i5c,"P->A,Q->B,R->C,S->D,T->E",tcr alpha chain,MH1,3.34,TCR ALPHA CHAIN|MH1|S|T,stcrdab_structures/8i5c.pdb
+8i5c,"o->A,p->B,q->C,r->D,s->E",unknown,MH1,3.34,UNKNOWN|MH1|R|S,stcrdab_structures/8i5c.pdb
+8i5c,"F->A,G->B,H->C,I->D,J->E",tcr alpha chain,MH1,3.34,TCR ALPHA CHAIN|MH1|I|J,stcrdab_structures/8i5c.pdb
+8i5c,"t->A,u->B,v->C,w->D,x->E",unknown,MH1,3.34,UNKNOWN|MH1|W|X,stcrdab_structures/8i5c.pdb
+8i5c,"j->A,k->B,l->C,m->D,n->E",unknown,MH1,3.34,UNKNOWN|MH1|M|N,stcrdab_structures/8i5c.pdb
+8i5c,"e->A,f->B,g->C,h->D,i->E",unknown,MH1,3.34,UNKNOWN|MH1|H|I,stcrdab_structures/8i5c.pdb
+8i5c,"Z->A,a->B,b->C,c->D,d->E",unknown,MH1,3.34,UNKNOWN|MH1|C|D,stcrdab_structures/8i5c.pdb
+8i5c,"A->A,B->B,C->C,D->D,E->E",tcr alpha chain,MH1,3.34,TCR ALPHA CHAIN|MH1|D|E,stcrdab_structures/8i5c.pdb
+8i5c,"U->A,V->B,W->C,X->D,Y->E",tcr alpha chain,MH1,3.34,TCR ALPHA CHAIN|MH1|X|Y,stcrdab_structures/8i5c.pdb
+8i5d,"A->D,B->E,H->A,L->B,P->C",peptide kras-g12v-9,MH1,3.3,PEPTIDE KRAS-G12V-9|MH1|A|B,stcrdab_structures/8i5d.pdb
+8pjg,"A->A,B->B,C->C,D->D,E->E",hemagglutinin ha2 chain,MH2,1.83,HEMAGGLUTININ HA2 CHAIN|MH2|D|E,stcrdab_structures/8pjg.pdb
+8sgb,"A->C,B->B,C->D,D->E,E->C",sphingomyelin  | N-ACETYL-D-GLUCOSAMINE,CD1,2.80002,SPHINGOMYELIN  | N-ACETYL-D-GLUCOSAMINE|CD1|C|D,stcrdab_structures/8sgb.pdb
+8shi,"D->A,E->B,F->C,I->D,J->E",val-arg-ser-arg-arg-aba-leu-arg-leu,MH1,2.90002,VAL-ARG-SER-ARG-ARG-ABA-LEU-ARG-LEU|MH1|I|J,stcrdab_structures/8shi.pdb
+8shi,"A->A,B->B,C->C,G->D,H->E",val-arg-ser-arg-arg-aba-leu-arg-leu,MH1,2.90002,VAL-ARG-SER-ARG-ARG-ABA-LEU-ARG-LEU|MH1|G|H,stcrdab_structures/8shi.pdb
+8t4z,"A->C,B->B,C->D,D->E","N-[(2R,3R,4E)-1,3-dihydroxyoctadec-4-en-2-yl]tetracosanamide",CD1,2.691,"N-[(2R,3R,4E)-1,3-DIHYDROXYOCTADEC-4-EN-2-YL]TETRACOSANAMIDE|CD1|C|D",stcrdab_structures/8t4z.pdb
+8trl,"D->A,E->B,F->C,G->D,H->E",alpha-enolase,MH2,2.4,ALPHA-ENOLASE|MH2|G|H,stcrdab_structures/8trl.pdb
+8trl,"A->A,B->B,C->C,I->D,J->E",alpha-enolase,MH2,2.4,ALPHA-ENOLASE|MH2|I|J,stcrdab_structures/8trl.pdb
+8trq,"B->A,C->C,D->D,E->E",vimentin,GB,2.75,VIMENTIN|GB|D|E,stcrdab_structures/8trq.pdb
+8trr,"F->A,G->B,H->C,I->D,J->E",vimentin,MH2,2.65,VIMENTIN|MH2|I|J,stcrdab_structures/8trr.pdb
+8trr,"A->A,B->B,C->C,D->D,E->E",vimentin,MH2,2.65,VIMENTIN|MH2|D|E,stcrdab_structures/8trr.pdb
+8vcx,"A->A,B->B,C->C,D->D,E->E",proinsulin c-peptide (insc8-22),MH2,2.59,PROINSULIN C-PEPTIDE (INSC8-22)|MH2|D|E,stcrdab_structures/8vcx.pdb
+8vcy,"A->A,B->B,C->C,D->D,E->E",hybrid insulin peptide (hip; insc8-15-npy68-74),MH2,2.6,HYBRID INSULIN PEPTIDE (HIP; INSC8-15-NPY68-74)|MH2|D|E,stcrdab_structures/8vcy.pdb
+8vd2,"A->A,B->B,C->C,D->D,E->E",hybrid insulin peptide (hip; insc8-15-iapp23-29 ),MH2,2.9,HYBRID INSULIN PEPTIDE (HIP; INSC8-15-IAPP23-29 )|MH2|D|E,stcrdab_structures/8vd2.pdb
+8wul,"E->D,F->E,O->A,P->B,Q->C",kras-g12v nonamer peptide,MH1,2.36,KRAS-G12V NONAMER PEPTIDE|MH1|E|F,stcrdab_structures/8wul.pdb
+8wul,"A->D,B->E,I->A,J->B,K->C",kras-g12v nonamer peptide,MH1,2.36,KRAS-G12V NONAMER PEPTIDE|MH1|A|B,stcrdab_structures/8wul.pdb
+8wul,"G->D,H->E,R->A,S->B,T->C",kras-g12v nonamer peptide,MH1,2.36,KRAS-G12V NONAMER PEPTIDE|MH1|G|H,stcrdab_structures/8wul.pdb
+8wul,"C->D,D->E,L->A,M->B,N->C",kras-g12v nonamer peptide,MH1,2.36,KRAS-G12V NONAMER PEPTIDE|MH1|C|D,stcrdab_structures/8wul.pdb
+8ye4,"A->A,B->B,E->C,G->D,H->E",spike protein s1,MH1,3.2,SPIKE PROTEIN S1|MH1|G|H,stcrdab_structures/8ye4.pdb

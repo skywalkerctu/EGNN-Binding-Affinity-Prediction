@@ -30,8 +30,41 @@
 #                        disk otherwise across ~20k jobs).
 set -uo pipefail
 
-PROJECT_DIR="${PROJECT_DIR:-$PWD}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+[ -f "$SCRIPT_DIR/site_env.sh" ] && . "$SCRIPT_DIR/site_env.sh"
+
+PROJECT_DIR="$(cd "${PROJECT_DIR:-$PWD}" && pwd)"
 cd "$PROJECT_DIR"
+
+extract_leading_int() {
+  printf '%s\n' "${1:-}" | sed -E 's/^([0-9]+).*/\1/'
+}
+
+default_worker_count() {
+  local candidate="${SLURM_CPUS_PER_TASK:-}"
+  if [ -n "$candidate" ] && [ "$candidate" -gt 1 ] 2>/dev/null; then
+    printf '%s\n' "$candidate"
+    return
+  fi
+
+  candidate="$(extract_leading_int "${SLURM_CPUS_ON_NODE:-${SLURM_JOB_CPUS_PER_NODE:-}}")"
+  if [ -n "$candidate" ] && [ "$candidate" -gt 1 ] 2>/dev/null; then
+    printf '%s\n' "$candidate"
+    return
+  fi
+
+  nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 64
+}
+
+run_flex_ddg() {
+  if [ -n "${PYTHON:-}" ]; then
+    "$PYTHON" rosetta_flex/run_flex_ddg.py "$@"
+  elif command -v uv >/dev/null 2>&1 && [ -f pyproject.toml ]; then
+    uv run python rosetta_flex/run_flex_ddg.py "$@"
+  else
+    python rosetta_flex/run_flex_ddg.py "$@"
+  fi
+}
 
 export TASK_ID="${TASK_ID:-${SLURM_ARRAY_TASK_ID:-0}}"
 export NODES="${NODES:-1}"
@@ -42,27 +75,15 @@ export NODES="${NODES:-1}"
 #   2. nproc (Linux) or sysctl -n hw.ncpu (macOS, for local dev/testing).
 #   3. 64 as a last-resort fallback if neither tool exists.
 if [ -z "${CORES_PER_NODE:-}" ]; then
-    CORES_PER_NODE="${SLURM_CPUS_PER_TASK:-${SLURM_JOB_CPUS_PER_NODE:-}}"
-    if [ -z "$CORES_PER_NODE" ]; then
-        CORES_PER_NODE="$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 64)"
-    fi
+  CORES_PER_NODE="$(default_worker_count)"
 fi
 export CORES_PER_NODE
-export JOBS_CSV="${JOBS_CSV:-rosetta_flex/jobs/jobs.csv}"
-export PARTS_DIR="${PARTS_DIR:-rosetta_flex/results/parts}"
-export WORK_DIR="${WORK_DIR:-rosetta_flex/results/work}"
-export PROTOCOL_XML="${PROTOCOL_XML:-rosetta_flex/ddG_backrub.xml}"
-# Default the Python launcher to the uv-managed venv when uv is present (so a local
-# `bash run_node_chunk.sh` uses the same deps as `uv sync`), else bare python. Override
-# with PYTHON=... (e.g. PYTHON=.venv/bin/python) to skip uv's per-call resolution.
-if [ -z "${PYTHON:-}" ]; then
-    if command -v uv >/dev/null 2>&1 && [ -f pyproject.toml ]; then
-        PYTHON="uv run python"
-    else
-        PYTHON="python"
-    fi
-fi
-export PYTHON
+export JOBS_CSV="${JOBS_CSV:-$PROJECT_DIR/rosetta_flex/jobs/jobs.csv}"
+export PARTS_DIR="${PARTS_DIR:-$PROJECT_DIR/rosetta_flex/results/parts}"
+export WORK_DIR="${WORK_DIR:-$PROJECT_DIR/rosetta_flex/results/work}"
+export PROTOCOL_XML="${PROTOCOL_XML:-$PROJECT_DIR/rosetta_flex/ddG_backrub.xml}"
+# When unset, workers default to `uv run python` if uv + pyproject.toml are present,
+# else plain `python`. Override with PYTHON=/path/to/python to skip uv resolution.
 export ROSETTA_SCRIPTS_BIN="${ROSETTA_SCRIPTS_BIN:-rosetta_scripts.default.linuxgccrelease}"
 export BACKRUB_TRIALS="${BACKRUB_TRIALS:-3500}"   # Graphinity full-accuracy default; 1500 = throughput-tuned
 export NSTRUCT="${NSTRUCT:-1}"
@@ -85,7 +106,7 @@ run_one() {
   # ${arr[@]+"${arr[@]}"} expands to nothing when the array is empty *without*
   # tripping `set -u` on bash < 4.4 (macOS ships bash 3.2). A bare "${gam_arg[@]}"
   # on an empty array is an "unbound variable" error there and kills every worker.
-  "$PYTHON" rosetta_flex/run_flex_ddg.py \
+  run_flex_ddg \
     --jobs_csv "$JOBS_CSV" \
     --job-index "$i" \
     --rosetta_bin "$ROSETTA_SCRIPTS_BIN" \
@@ -135,8 +156,10 @@ fi
 # directly, so a bare "$0" would need this file to carry the executable bit — which a fresh
 # git checkout may not preserve, silently failing every worker with EACCES.
 _self="${BASH_SOURCE[0]:-$0}"
+xargs_status=0
 printf '%s\n' "${todo[@]}" \
-  | xargs -P "$CORES_PER_NODE" -I{} "${BASH:-bash}" "$_self" --one {}
+  | xargs -P "$CORES_PER_NODE" -I{} "${BASH:-bash}" "$_self" --one {} \
+  || xargs_status=$?
 
 # Report completion for this node's slice.
 done_ct=0
@@ -145,3 +168,7 @@ for (( i=TASK_ID; i<NJOBS; i+=NODES )); do
 done
 total_slice=$(( (NJOBS - TASK_ID + NODES - 1) / NODES ))
 echo "Node ${TASK_ID} finished: ${done_ct}/${total_slice} of its jobs have outputs."
+if [ "$xargs_status" -ne 0 ]; then
+  echo "Node ${TASK_ID} encountered worker failures; see stderr for failed job indices." >&2
+  exit "$xargs_status"
+fi

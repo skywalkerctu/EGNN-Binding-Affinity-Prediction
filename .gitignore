@@ -5,3 +5,7 @@ __pycache__/
 *.log
 *.pdb
 runs/
+logs/
+results/
+scratch/
+rosetta_flex/jobs/

@@ -38,6 +38,9 @@
 
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+[ -f "$SCRIPT_DIR/site_env.sh" ] && . "$SCRIPT_DIR/site_env.sh"
+
 # Load or locate Rosetta. UC ARC has no stock module yet (build per BUILD_ROSETTA.md), so
 # ROSETTA_SCRIPTS_BIN should be exported to your compiled binary; the module load is a no-op
 # fallback for sites that do ship one.

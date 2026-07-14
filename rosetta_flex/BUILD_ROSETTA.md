@@ -69,7 +69,8 @@ Notes:
 
 ## 3. Point the pipeline at your binary
 ```bash
-export ROSETTA_SCRIPTS_BIN=/scratch/$USER/rosetta*/main/source/bin/rosetta_scripts.default.linuxgccrelease
+export ROSETTA_SCRIPTS_BIN="$(find /scratch/$USER -path '*/rosetta_scripts.default.linuxgccrelease' -print -quit)"
+test -n "$ROSETTA_SCRIPTS_BIN" || { echo "rosetta_scripts.default.linuxgccrelease not found under /scratch/$USER"; exit 1; }
 # sanity check:
 "$ROSETTA_SCRIPTS_BIN" -help >/dev/null && echo "rosetta_scripts OK"
 ```

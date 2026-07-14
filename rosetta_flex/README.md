@@ -96,6 +96,8 @@ target window, pass a lower `--backrub_trials`/`BACKRUB_TRIALS` (e.g. `1500`) �
 ## Workflow (on UC ARC)
 ```bash
 # 0. One-time: build Rosetta and export ROSETTA_SCRIPTS_BIN  (see BUILD_ROSETTA.md)
+#    This checkout also carries rosetta_flex/site_env.sh, which auto-loads the verified
+#    local build under scratch/ for the submit scripts if you do not export your own path.
 
 # 1. Enumerate the 20k-sample budget (safe to run anywhere; no Rosetta needed)
 uv run python rosetta_flex/make_mutfiles.py --pdb_dir stcrdab_structures/ \
@@ -137,7 +139,8 @@ Defaults follow the Flex ddG settings validated by Hummer et al.
   see `estimate_runtime.py`'s `--ntrials_grid` for the tradeoff table at other values).
 - **Ensemble size: `nstruct = 1`** (`--nstruct` / `NSTRUCT`) — vs Barlow 2018's `35`.
 - Score function: `talaris2014`.
-- `chains_to_move`: `DE` (TCR α/β separated from pMHC `ABC`) — set in `make_mutfiles.py`.
+- `chains_to_move`: request `DE` by default, but `make_mutfiles.py` now stores the subset of those
+  TCR chains actually present in each structure before Rosetta is launched.
 
 At `backrub=3500`/`nstruct=1` these are ~**350× cheaper per mutation** than the full Barlow protocol
 for **near-identical ΔΔG**; `backrub=1500` trims a further ~40% of backrub cost if you need it.

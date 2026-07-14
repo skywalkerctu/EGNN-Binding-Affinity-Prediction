@@ -92,6 +92,32 @@ JOBS_FIELDS = [
 Sample = Tuple[str, str, MutationTarget, str]  # (pdb_id, pdb_path, target, mut_one)
 
 
+def parse_chain_spec(value: str) -> Tuple[str, ...]:
+    compact = value.strip().replace(" ", "")
+    if not compact:
+        return ()
+    if "," in compact:
+        return tuple(part for part in compact.split(",") if part)
+    return tuple(compact)
+
+
+def resolve_present_move_chains(structure, pdb_id: str, requested_chains: Sequence[str]) -> str:
+    present = {chain.id for chain in next(structure.get_models())}
+    usable = [chain for chain in requested_chains if chain in present]
+    if not usable:
+        LOGGER.warning(
+            "%s: none of requested chains_to_move %s are present (present chains: %s); skipping.",
+            pdb_id, list(requested_chains), sorted(present),
+        )
+        return ""
+    if usable != list(requested_chains):
+        LOGGER.warning(
+            "%s: using present subset of chains_to_move %s -> %s",
+            pdb_id, list(requested_chains), usable,
+        )
+    return "".join(usable)
+
+
 def write_resfile(path: Path, chain: str, resnum: int, icode: str, mut_one: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     # Rosetta resfile: insertion code is appended to the number with no space
@@ -135,7 +161,7 @@ def _structure_queue(targets: Sequence[MutationTarget], per_structure_cap: int, 
 
 
 def select_samples(
-    struct_targets: List[Tuple[str, str, List[MutationTarget]]],
+    struct_targets: List[Tuple[str, str, List[MutationTarget], str]],
     target_samples: int,
     per_structure_cap: int,
     seed: int,
@@ -147,21 +173,21 @@ def select_samples(
     budget spreads over as many complexes as possible; deterministic under ``seed``.
     """
     rng = random.Random(seed)
-    queues: List[Tuple[str, str, List[Tuple[MutationTarget, str]]]] = []
-    for pdb_id, pdb_path, targets in struct_targets:
+    queues: List[Tuple[str, str, List[Tuple[MutationTarget, str]], str]] = []
+    for pdb_id, pdb_path, targets, move_chains in struct_targets:
         q = _structure_queue(targets, per_structure_cap, rng)
         if q:
-            queues.append((pdb_id, pdb_path, q))
+            queues.append((pdb_id, pdb_path, q, move_chains))
 
     selected: List[Sample] = []
     cursors = [0] * len(queues)
     made_progress = True
     while made_progress and (target_samples <= 0 or len(selected) < target_samples):
         made_progress = False
-        for si, (pdb_id, pdb_path, q) in enumerate(queues):
+        for si, (pdb_id, pdb_path, q, move_chains) in enumerate(queues):
             if cursors[si] < len(q):
                 t, mut = q[cursors[si]]
-                selected.append((pdb_id, pdb_path, t, mut))
+                selected.append((pdb_id, pdb_path, t, mut, move_chains))
                 cursors[si] += 1
                 made_progress = True
                 if target_samples > 0 and len(selected) >= target_samples:
@@ -173,9 +199,10 @@ def collect_struct_targets(
     pdb_files: Sequence[str],
     tcr_chains: Sequence[str],
     complex_chains: Sequence[str],
+    requested_move_chains: Sequence[str],
     interface_radius: float,
     max_interchain_dist: float,
-) -> Tuple[List[Tuple[str, str, List[MutationTarget]]], int]:
+) -> Tuple[List[Tuple[str, str, List[MutationTarget], str]], int]:
     """Parse every structure once and return contact-filtered, tightness-sorted targets.
 
     Returns ``(struct_targets, n_dropped_residues)``. A residue is kept only if it is a
@@ -183,18 +210,21 @@ def collect_struct_targets(
     (``-1`` means the distance could not be computed, so it is dropped).
     """
     parser = PDBParser(QUIET=True)
-    struct_targets: List[Tuple[str, str, List[MutationTarget]]] = []
+    struct_targets: List[Tuple[str, str, List[MutationTarget], str]] = []
     n_dropped = 0
     for pdb_path in pdb_files:
         pdb_id = Path(pdb_path).stem.lower()
         try:
             structure = parser.get_structure(pdb_id, pdb_path)
             targets = find_interface_targets(structure, tcr_chains, complex_chains, interface_radius)
+            move_chains = resolve_present_move_chains(structure, pdb_id, requested_move_chains)
         except Exception as exc:  # noqa: BLE001
             LOGGER.warning("%s: interface detection failed (%s); skipping.", pdb_id, exc)
             continue
         if not targets:
             LOGGER.warning("%s: no interface targets found; skipping.", pdb_id)
+            continue
+        if not move_chains:
             continue
         if max_interchain_dist and max_interchain_dist > 0:
             kept = [t for t in targets if 0.0 <= t.min_interchain_dist <= max_interchain_dist]
@@ -205,7 +235,7 @@ def collect_struct_targets(
             continue
         # Tightest genuine contacts first; ties broken by proximity to the CDR centre.
         kept.sort(key=lambda t: (t.min_interchain_dist, t.distance_to_cdr))
-        struct_targets.append((pdb_id, pdb_path, kept))
+        struct_targets.append((pdb_id, pdb_path, kept, move_chains))
     return struct_targets, n_dropped
 
 
@@ -221,12 +251,14 @@ def main() -> None:
     ap.add_argument("--tcr_chains", type=str, default=",".join(DEFAULT_TCR_CHAINS))
     ap.add_argument("--complex_chains", type=str, default=",".join(DEFAULT_COMPLEX_CHAINS))
     ap.add_argument("--chains_to_move", type=str, default="".join(DEFAULT_TCR_CHAINS),
-                    help="Chains separated to compute binding ddG (default 'DE' = the TCR moves off the pMHC).")
+                    help="Requested TCR chains for binding ddG separation (default 'DE'). For each structure, "
+                         "jobs.csv stores the subset of those chains actually present in the input PDB.")
     ap.add_argument("--limit", type=int, default=None, help="Only parse the first N PDBs (dry runs).")
     args = ap.parse_args()
 
     tcr_chains = tuple(c.strip() for c in args.tcr_chains.split(",") if c.strip())
     complex_chains = tuple(c.strip() for c in args.complex_chains.split(",") if c.strip())
+    requested_move_chains = parse_chain_spec(args.chains_to_move)
     out_dir = Path(args.out_dir)
     resfile_dir = out_dir / "resfiles"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -239,7 +271,7 @@ def main() -> None:
         return
 
     struct_targets, n_dropped = collect_struct_targets(
-        pdb_files, tcr_chains, complex_chains, args.interface_radius, args.max_interchain_dist,
+        pdb_files, tcr_chains, complex_chains, requested_move_chains, args.interface_radius, args.max_interchain_dist,
     )
     if not struct_targets:
         LOGGER.error("No structures with genuine interface contacts found (check chains / radius / --max_interchain_dist).")
@@ -264,7 +296,7 @@ def main() -> None:
     with open(jobs_path, "w", newline="") as jf:
         writer = csv.DictWriter(jf, fieldnames=JOBS_FIELDS)
         writer.writeheader()
-        for job_id, (pdb_id, pdb_path, t, mut_one) in enumerate(selected):
+        for job_id, (pdb_id, pdb_path, t, mut_one, move_chains) in enumerate(selected):
             wt_one = t.wt_aa_one
             resfile = resfile_dir / pdb_id / f"{t.chain}{t.resnum}{t.icode}{wt_one}{mut_one}.resfile"
             write_resfile(resfile, t.chain, t.resnum, t.icode, mut_one)
@@ -278,7 +310,7 @@ def main() -> None:
                     "wt_aa": wt_one,
                     "mut_aa": mut_one,
                     "resfile_path": str(resfile),
-                    "chains_to_move": args.chains_to_move,
+                    "chains_to_move": move_chains,
                     "min_interchain_dist": round(t.min_interchain_dist, 3),
                 }
             )

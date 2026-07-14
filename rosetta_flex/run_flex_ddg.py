@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import glob
 import logging
 import os
 import shutil
@@ -31,6 +32,8 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+
+from Bio.PDB import PDBParser
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 LOGGER = logging.getLogger("run_flex_ddg")
@@ -53,6 +56,104 @@ SOURCE_TAG = "rosetta_flex"
 # fabricated numbers -- absent file simply falls back to raw total_score, "nogam").
 DEFAULT_GAM_COEFFS = Path(__file__).resolve().parent / "gam_coeffs" / "flex_ddg_gam.json"
 
+ROSETTA_BIN_PATTERNS = (
+    "rosetta_scripts.default.*release",
+    "rosetta_scripts.*release",
+)
+
+
+def _resolve_rosetta_path(path_str: str) -> Optional[str]:
+    path = Path(path_str)
+    if path.is_dir():
+        for pattern in ROSETTA_BIN_PATTERNS:
+            matches = sorted(
+                candidate for candidate in path.glob(pattern)
+                if candidate.is_file() and os.access(candidate, os.X_OK)
+            )
+            if matches:
+                return str(matches[0].resolve())
+        return None
+
+    if path.is_file() and os.access(path, os.X_OK):
+        return str(path.resolve())
+
+    return None
+
+
+def resolve_rosetta_bin(value: Optional[str]) -> str:
+    """Resolve the Rosetta executable from a file, a glob, a bin dir, or PATH."""
+    raw_candidate = (value or "").strip()
+    if not raw_candidate:
+        raw_candidate = (os.environ.get("ROSETTA_SCRIPTS_BIN") or "").strip()
+    if not raw_candidate:
+        raw_candidate = "rosetta_scripts.default.linuxgccrelease"
+
+    candidate = os.path.expanduser(os.path.expandvars(raw_candidate))
+    path_matches = glob.glob(candidate) if glob.has_magic(candidate) else [candidate]
+    for path_match in path_matches:
+        resolved_path = _resolve_rosetta_path(path_match)
+        if resolved_path:
+            return resolved_path
+
+    resolved = shutil.which(candidate)
+    if resolved:
+        return resolved
+
+    raw_hint = ""
+    if raw_candidate != candidate:
+        raw_hint = f" Expanded from {raw_candidate!r}."
+
+    raise FileNotFoundError(
+        "Rosetta executable not found. Pass --rosetta_bin /path/to/rosetta_scripts.default.linuxgccrelease "
+        "or export ROSETTA_SCRIPTS_BIN to that executable or its bin directory. Blank values are treated as unset. "
+        f"Resolved candidate: {candidate!r}.{raw_hint}"
+    )
+
+
+def resolve_existing_path(path_str: str, description: str) -> str:
+    path = Path(path_str).expanduser()
+    if not path.is_absolute():
+        path = Path.cwd() / path
+    path = path.resolve()
+    if not path.exists():
+        raise FileNotFoundError(f"{description} not found: {path}")
+    return str(path)
+
+
+def resolve_runtime_path(path_str: str) -> str:
+    path = Path(path_str).expanduser()
+    if not path.is_absolute():
+        path = Path.cwd() / path
+    return str(path.resolve())
+
+
+def format_rosetta_chain_list(value: str) -> str:
+    compact = value.strip().replace(" ", "")
+    if "," in compact:
+        return compact
+    return ",".join(compact)
+
+
+def resolve_chains_to_move(job: Dict[str, str]) -> str:
+    requested = [chain.strip() for chain in format_rosetta_chain_list(job["chains_to_move"]).split(",") if chain.strip()]
+    if not requested:
+        raise ValueError(f"job {job['job_id']}: chains_to_move is empty")
+
+    structure = PDBParser(QUIET=True).get_structure(job["pdb_id"], job["pdb_path"])
+    present = {chain.id for chain in next(structure.get_models())}
+    usable = [chain for chain in requested if chain in present]
+    if not usable:
+        raise ValueError(
+            f"job {job['job_id']} ({job['pdb_id']}): none of requested chains_to_move {requested} "
+            f"are present in {job['pdb_path']} (present chains: {sorted(present)})"
+        )
+    if usable != requested:
+        LOGGER.warning(
+            "job %s (%s): using present subset of chains_to_move %s -> %s",
+            job["job_id"], job["pdb_id"], requested, usable,
+        )
+    return ",".join(usable)
+
 
 # --------------------------------------------------------------------------- #
 # Rosetta command construction                                                #
@@ -64,7 +165,7 @@ def build_command(job: Dict[str, str], args) -> List[str]:
         "-s", job["pdb_path"],
         "-parser:protocol", args.protocol_xml,
         "-parser:script_vars",
-        f"chainstomove={job['chains_to_move']}",
+        f"chainstomove={resolve_chains_to_move(job)}",
         f"pathtoresfile={job['resfile_path']}",
         f"backrubntrials={args.backrub_trials}",
         "-nstruct", str(args.nstruct),
@@ -79,7 +180,8 @@ def build_command(job: Dict[str, str], args) -> List[str]:
 
 
 def run_rosetta(job: Dict[str, str], args) -> Path:
-    workdir = Path(job["_workdir"])
+    workdir = Path(resolve_runtime_path(job["_workdir"]))
+    job["_workdir"] = str(workdir)
     # A killed/preempted attempt at this same job-index can leave a half-written ddG.db3 or
     # other Rosetta output behind (resume only checks the output CSV, not this dir -- see
     # main()). Rosetta's ReportToDB opens the db3 with normal sqlite semantics, so a stale
@@ -306,7 +408,7 @@ def main() -> None:
     ap.add_argument("--jobs_csv", type=str, default="rosetta_flex/jobs/jobs.csv")
     ap.add_argument("--job-index", type=int, default=None, help="0-based row in jobs.csv (e.g. $SLURM_ARRAY_TASK_ID).")
     ap.add_argument("--output", type=str, default="rosetta_flex/results/flex_ddg.csv")
-    ap.add_argument("--rosetta_bin", type=str, default=os.environ.get("ROSETTA_SCRIPTS_BIN", "rosetta_scripts.default.linuxgccrelease"))
+    ap.add_argument("--rosetta_bin", type=str, default=None)
     ap.add_argument("--protocol_xml", type=str, default="rosetta_flex/ddG_backrub.xml")
     ap.add_argument("--backrub_trials", type=int, default=3500,
                     help="Backrub MC steps. Default 3500 = Graphinity/Hummer et al. 2025's validated "
@@ -366,6 +468,11 @@ def main() -> None:
         LOGGER.info("job-index %d: output %s already present; skipping.", args.job_index, out_path)
         return
 
+    try:
+        args.rosetta_bin = resolve_rosetta_bin(args.rosetta_bin)
+        args.protocol_xml = resolve_existing_path(args.protocol_xml, "Rosetta protocol XML")
+    except FileNotFoundError as exc:
+        ap.error(str(exc))
     job = read_job(args.jobs_csv, args.job_index)
     job["_workdir"] = args.workdir or tempfile.mkdtemp(prefix=f"flexddg_{job['job_id']}_")
     db3 = run_rosetta(job, args)

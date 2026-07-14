@@ -19,6 +19,10 @@
 #   bash rosetta_flex/submit_all_nodes.sh -p community -m 20 -- --time=06:00:00
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+[ -f "$SCRIPT_DIR/site_env.sh" ] && . "$SCRIPT_DIR/site_env.sh"
+
 PARTITION=""
 ACCOUNT=""
 MAX_NODES=""
@@ -65,15 +69,23 @@ if [ -n "$MAX_NODES" ] && [ "$NODES" -gt "$MAX_NODES" ]; then
   NODES="$MAX_NODES"
 fi
 
-JOBS_CSV="${JOBS_CSV:-rosetta_flex/jobs/jobs.csv}"
+JOBS_CSV="${JOBS_CSV:-$PROJECT_DIR/rosetta_flex/jobs/jobs.csv}"
 if [ ! -f "$JOBS_CSV" ]; then
   echo "jobs.csv not found at $JOBS_CSV -- run make_mutfiles.py first." >&2
   exit 1
 fi
 NJOBS=$(( $(wc -l < "$JOBS_CSV") - 1 ))
 
+ROSETTA_SCRIPTS_BIN="${ROSETTA_SCRIPTS_BIN:-rosetta_scripts.default.linuxgccrelease}"
+if [ ! -x "$ROSETTA_SCRIPTS_BIN" ] && ! command -v "$ROSETTA_SCRIPTS_BIN" >/dev/null 2>&1; then
+  echo "ROSETTA_SCRIPTS_BIN is not executable or on PATH: $ROSETTA_SCRIPTS_BIN" >&2
+  echo "Set it explicitly, or update rosetta_flex/site_env.sh to the correct build." >&2
+  exit 1
+fi
+
 echo "Partition '$PARTITION': $NODES idle node(s) right now -- sizing --array=0-$((NODES-1))."
 echo "jobs.csv: $NJOBS jobs across $NODES node(s)."
+echo "rosetta bin: $ROSETTA_SCRIPTS_BIN"
 
 account_args=()
 [ -n "$ACCOUNT" ] && account_args=(--account="$ACCOUNT")
@@ -82,6 +94,6 @@ sbatch \
   --partition="$PARTITION" \
   "${account_args[@]+"${account_args[@]}"}" \
   --array=0-$((NODES - 1)) \
-  --export="ALL,NJOBS=$NJOBS,NODES=$NODES" \
+  --export="ALL,PROJECT_DIR=$PROJECT_DIR,NJOBS=$NJOBS,NODES=$NODES" \
   "${SBATCH_EXTRA[@]+"${SBATCH_EXTRA[@]}"}" \
-  rosetta_flex/submit_array.sbatch
+  "$SCRIPT_DIR/submit_array.sbatch"
